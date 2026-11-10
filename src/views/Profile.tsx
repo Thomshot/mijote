@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, KeyRound, Smartphone } from "lucide-react";
+import { Check, ChevronLeft, KeyRound, Smartphone } from "lucide-react";
 import { useApp } from "../state";
 import type { Profile as P, Settings } from "../types";
 import { AIError, testKey } from "../ai";
@@ -109,11 +109,11 @@ function AISettings() {
   return (
     <section className="panel">
       <h2>
-        <KeyRound size={18} /> Intelligence artificielle
+        <KeyRound size={18} /> IA (optionnel)
       </h2>
       <p className="muted small">
-        Mijote utilise Claude pour inventer des recettes. Colle ici une clé API (créée sur console.anthropic.com). Elle reste
-        uniquement sur ce téléphone.
+        L'appli est 100 % gratuite sans IA. En bonus, une clé API Claude (console.anthropic.com, payant à l'usage) permet
+        d'inventer des recettes inédites, d'adapter n'importe quelle recette et de la remixer. La clé reste sur ce téléphone.
       </p>
       <div className="inline-form">
         <input
@@ -158,19 +158,22 @@ function AISettings() {
   );
 }
 
-export function Profile() {
+export function Profile({ onBack }: { onBack: () => void }) {
   const app = useApp();
   return (
     <div className="view">
       <header className="hero">
+        <button className="link-btn" onClick={onBack}>
+          <ChevronLeft size={16} /> Retour
+        </button>
         <h1>Profil</h1>
         <p className="muted">Tout ce qui aide Mijote à viser juste.</p>
       </header>
-      <AISettings />
       <section className="panel">
         <h2>Goûts & contraintes</h2>
         <PreferencesForm profile={app.profile} onChange={app.setProfile} />
       </section>
+      <AISettings />
       <section className="panel">
         <h2>
           <Smartphone size={18} /> Installer sur l'iPhone

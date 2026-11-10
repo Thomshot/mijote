@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { CalendarDays, Heart, ShoppingBasket, Sparkles, User } from "lucide-react";
+import { BookOpen, CalendarDays, Heart, ShoppingBasket, Sparkles } from "lucide-react";
 import { AppProvider, useApp } from "./state";
 import { Discover } from "./views/Discover";
 import { Plan } from "./views/Plan";
+import { Browse } from "./views/Browse";
 import { Shopping } from "./views/Shopping";
 import { Favorites } from "./views/Favorites";
 import { Profile } from "./views/Profile";
@@ -12,14 +13,14 @@ import { CookMode } from "./components/CookMode";
 import { AIError, remixRecipe } from "./ai";
 import { haptic } from "./utils";
 
-type Tab = "decouvrir" | "menu" | "courses" | "carnet" | "profil";
+type Tab = "decouvrir" | "recettes" | "menu" | "courses" | "carnet" | "profil";
 
 const TABS: { id: Tab; label: string; icon: typeof Sparkles }[] = [
   { id: "decouvrir", label: "Découvrir", icon: Sparkles },
+  { id: "recettes", label: "Recettes", icon: BookOpen },
   { id: "menu", label: "Menu", icon: CalendarDays },
   { id: "courses", label: "Courses", icon: ShoppingBasket },
   { id: "carnet", label: "Carnet", icon: Heart },
-  { id: "profil", label: "Profil", icon: User },
 ];
 
 function Shell() {
@@ -40,10 +41,11 @@ function Shell() {
     <>
       <main className="app">
         {tab === "decouvrir" && <Discover goProfile={goProfile} />}
-        {tab === "menu" && <Plan goProfile={goProfile} />}
+        {tab === "recettes" && <Browse />}
+        {tab === "menu" && <Plan />}
         {tab === "courses" && <Shopping />}
         {tab === "carnet" && <Favorites />}
-        {tab === "profil" && <Profile />}
+        {tab === "profil" && <Profile onBack={() => setTab("decouvrir")} />}
       </main>
 
       <nav className="tabbar">

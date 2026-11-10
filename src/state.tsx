@@ -1,22 +1,9 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import type { PlanEntry, Profile, Recipe, Settings, ShoppingItem } from "./types";
+import { DEFAULT_PROFILE } from "./defaults";
 import { useStored } from "./storage";
 import type { AICtx } from "./ai";
 import { mergeIntoShopping } from "./utils";
-
-export const DEFAULT_PROFILE: Profile = {
-  name: "",
-  servings: 2,
-  budgetPerServing: 4,
-  maxMinutes: 45,
-  likes: [],
-  dislikes: [],
-  diets: [],
-  level: "intermédiaire",
-  equipment: ["four", "plaques"],
-  notes: "",
-  onboarded: false,
-};
 
 const DEFAULT_SETTINGS: Settings = { apiKey: "", creativity: "équilibrée" };
 

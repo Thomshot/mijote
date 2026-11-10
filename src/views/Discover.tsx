@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { BookOpen, KeyRound, Refrigerator, Sparkles, WandSparkles } from "lucide-react";
+import { BookOpen, Refrigerator, Shuffle, Sparkles, User, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
-import { MEAL_TYPES, type MealType } from "../types";
+import { MEAL_TYPES, type MealType, type Recipe } from "../types";
 import { adaptRecipe, AIError, generateIdeas } from "../ai";
-import { LIBRARY } from "../data/library";
+import { CRAVING_RULES, RECIPE_COUNT, suggest } from "../engine";
 import { Chip, Cooking, RecipeCard, Sheet } from "../components/ui";
 import { Guide } from "./Guide";
 
-const CRAVINGS = ["Réconfortant", "Rapide", "Healthy", "Petit budget", "Cuisine du monde", "Végétarien", "Pour recevoir", "Street food"];
+const CRAVINGS = Object.keys(CRAVING_RULES);
 
 function greeting(name: string) {
   const h = new Date().getHours();
@@ -18,9 +18,8 @@ function greeting(name: string) {
 function defaultMeal(): MealType {
   const h = new Date().getHours();
   if (h < 10) return "petit-déjeuner";
-  if (h < 14) return "déjeuner";
-  if (h < 17) return "goûter";
-  return "dîner";
+  if (h >= 15 && h < 18) return "snack";
+  return "plat";
 }
 
 export function Discover({ goProfile }: { goProfile: () => void }) {
@@ -29,15 +28,41 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
   const [craving, setCraving] = useState("");
   const [fridge, setFridge] = useState("");
   const [showFridge, setShowFridge] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [adaptOpen, setAdaptOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [adaptText, setAdaptText] = useState("");
   const [adapting, setAdapting] = useState(false);
+  const [shown, setShown] = useState<string[]>([]);
 
-  const inspire = async () => {
-    setLoading(true);
+  const criteria = () => ({ mealType: meal, craving, fridge: showFridge ? fridge : "", loved: app.aiCtx.loved });
+
+  const [picks, setPicks] = useState<Recipe[]>(() => suggest(app.profile, { mealType: defaultMeal(), loved: app.aiCtx.loved }, 6));
+
+  const inspire = (keepShown = false) => {
+    const exclude = keepShown ? shown : [];
+    const next = suggest(app.profile, { ...criteria(), exclude }, 6);
+    setPicks(next);
+    setShown([...exclude, ...next.map((r) => r.title)]);
+    setError(null);
+  };
+
+  const pickMeal = (m: MealType) => {
+    setMeal(m);
+    setShown([]);
+    setPicks(suggest(app.profile, { mealType: m, craving, fridge: showFridge ? fridge : "", loved: app.aiCtx.loved }, 6));
+  };
+
+  const pickCraving = (c: string) => {
+    const v = craving === c ? "" : c;
+    setCraving(v);
+    setShown([]);
+    setPicks(suggest(app.profile, { mealType: meal, craving: v, fridge: showFridge ? fridge : "", loved: app.aiCtx.loved }, 6));
+  };
+
+  const inventWithAI = async () => {
+    setAiLoading(true);
     setError(null);
     try {
       const recipes = await generateIdeas(app.aiCtx, {
@@ -53,7 +78,7 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
     } catch (e) {
       setError(e instanceof AIError ? e.message : "Oups, quelque chose s'est mal passé.");
     } finally {
-      setLoading(false);
+      setAiLoading(false);
     }
   };
 
@@ -75,41 +100,44 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
     }
   };
 
-  const libraryPicks = LIBRARY.filter((r) => r.mealType === meal || (meal === "goûter" && r.mealType === "dessert"));
-  const shownLibrary = libraryPicks.length ? libraryPicks : LIBRARY.slice(0, 4);
-
   return (
     <div className="view">
-      <header className="hero">
-        <p className="hero__kicker">{greeting(app.profile.name)} 👋</p>
-        <h1>
-          Qu'est-ce qu'on <em>mijote</em> aujourd'hui ?
-        </h1>
+      <header className="hero hero--row">
+        <div>
+          <p className="hero__kicker">{greeting(app.profile.name)} 👋</p>
+          <h1>
+            Qu'est-ce qu'on <em>mijote</em> ?
+          </h1>
+        </div>
+        <button className="icon-btn icon-btn--lg" onClick={goProfile} aria-label="Profil">
+          <User size={20} />
+        </button>
       </header>
 
       <section className="panel">
         <div className="chips chips--scroll">
           {MEAL_TYPES.map((m) => (
-            <Chip key={m} active={m === meal} onClick={() => setMeal(m)}>
+            <Chip key={m} active={m === meal} onClick={() => pickMeal(m)}>
               {m}
             </Chip>
           ))}
         </div>
 
-        <label className="label">Une envie particulière ?</label>
-        <input
-          className="input"
-          value={craving}
-          onChange={(e) => setCraving(e.target.value)}
-          placeholder="Ex : un truc fromager, une soupe thaï…"
-        />
+        <label className="label">Une envie ?</label>
         <div className="chips chips--scroll chips--small">
           {CRAVINGS.map((c) => (
-            <Chip key={c} active={craving === c} onClick={() => setCraving(craving === c ? "" : c)}>
+            <Chip key={c} active={craving === c} onClick={() => pickCraving(c)}>
               {c}
             </Chip>
           ))}
         </div>
+        <input
+          className="input"
+          value={CRAVINGS.includes(craving) ? "" : craving}
+          onChange={(e) => setCraving(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && inspire()}
+          placeholder="Ou tape une envie : fromage, coco, poulet…"
+        />
 
         <button className="link-btn" onClick={() => setShowFridge(!showFridge)}>
           <Refrigerator size={16} /> {showFridge ? "Ne pas utiliser le frigo" : "Cuisiner avec ce que j'ai dans le frigo"}
@@ -120,28 +148,29 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
             rows={2}
             value={fridge}
             onChange={(e) => setFridge(e.target.value)}
-            placeholder="Ex : 2 courgettes, du chèvre, des œufs, un reste de riz"
+            placeholder="Ex : courgettes, chèvre, œufs, riz"
           />
         )}
 
-        {app.aiEnabled ? (
-          <button className="btn btn--primary btn--block btn--lg" onClick={inspire} disabled={loading}>
-            <Sparkles size={20} /> {loading ? "En cuisine…" : "Inspire-moi"}
-          </button>
-        ) : (
-          <button className="btn btn--soft btn--block" onClick={goProfile}>
-            <KeyRound size={18} /> Activer l'IA (clé API) pour des idées infinies
+        <button className="btn btn--primary btn--block btn--lg" onClick={() => inspire()}>
+          <Sparkles size={20} /> Inspire-moi
+        </button>
+        {app.aiEnabled && (
+          <button className="btn btn--soft btn--block" onClick={inventWithAI} disabled={aiLoading}>
+            <WandSparkles size={18} /> {aiLoading ? "L'IA cuisine…" : "Inventer une recette inédite avec l'IA"}
           </button>
         )}
         {error && <p className="error">{error}</p>}
       </section>
 
-      {loading && <Cooking />}
+      {aiLoading && <Cooking />}
 
-      {!loading && app.ideas.length > 0 && (
+      {!aiLoading && app.ideas.length > 0 && (
         <section>
           <div className="section-title">
-            <h2>Idées pour toi</h2>
+            <h2>
+              <WandSparkles size={18} /> Créations de l'IA
+            </h2>
             <button className="link-btn" onClick={() => app.setIdeas([])}>
               Effacer
             </button>
@@ -160,35 +189,42 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
         </section>
       )}
 
+      <section>
+        <div className="section-title">
+          <h2>Pour toi</h2>
+          <button className="link-btn" onClick={() => inspire(true)}>
+            <Shuffle size={16} /> Autres idées
+          </button>
+        </div>
+        {picks.length === 0 ? (
+          <p className="muted">Aucune recette ne correspond à tous tes critères. Essaie d'enlever une envie ou un filtre.</p>
+        ) : (
+          <div className="grid">
+            {picks.map((r) => (
+              <RecipeCard
+                key={r.id}
+                recipe={r}
+                favorite={app.isFavorite(r)}
+                onOpen={() => app.setOpenRecipe(r)}
+                onToggleFavorite={() => app.toggleFavorite(r)}
+              />
+            ))}
+          </div>
+        )}
+        <p className="muted small center">Sélectionnées pour toi parmi {RECIPE_COUNT} recettes sans gluten, selon tes goûts, ton budget et ton temps.</p>
+      </section>
+
       <section className="tools">
         <button className="tool" onClick={() => (app.aiEnabled ? setAdaptOpen(true) : goProfile())}>
           <WandSparkles size={22} />
           <strong>Adapter une recette</strong>
-          <small>Colle n'importe quelle recette, l'IA la rend sans gluten</small>
+          <small>{app.aiEnabled ? "Colle n'importe quelle recette, l'IA la rend sans gluten" : "Option IA : à activer dans le profil"}</small>
         </button>
         <button className="tool" onClick={() => setGuideOpen(true)}>
           <BookOpen size={22} />
           <strong>Guide sans gluten</strong>
           <small>Substitutions et pièges à éviter</small>
         </button>
-      </section>
-
-      <section>
-        <div className="section-title">
-          <h2>Les classiques sans gluten</h2>
-        </div>
-        <div className="hscroll">
-          {shownLibrary.map((r) => (
-            <RecipeCard
-              key={r.id}
-              compact
-              recipe={r}
-              favorite={app.isFavorite(r)}
-              onOpen={() => app.setOpenRecipe(r)}
-              onToggleFavorite={() => app.toggleFavorite(r)}
-            />
-          ))}
-        </div>
       </section>
 
       <Sheet open={adaptOpen} onClose={() => !adapting && setAdaptOpen(false)} title="Adapter une recette">

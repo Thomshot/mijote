@@ -38,7 +38,10 @@ const norm = (s: string) =>
     .toLowerCase()
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
-    .trim();
+    .trim()
+    .split(/\s+/)
+    .map((w) => (w.length > 3 ? w.replace(/[sx]$/, "") : w)) // pluriels : oignons → oignon
+    .join(" ");
 
 /** Ajoute les ingrédients d'une ou plusieurs recettes à la liste, en fusionnant les doublons. */
 export function mergeIntoShopping(list: ShoppingItem[], recipes: { recipe: Recipe; servings?: number }[]) {
@@ -54,7 +57,9 @@ export function mergeIntoShopping(list: ShoppingItem[], recipes: { recipe: Recip
   }
   const next = [...list];
   for (const t of totals.values()) {
-    const quantity = `${formatQty(t.qty)} ${t.unit}`.trim();
+    // On n'achète pas un demi-poivron : arrondi au supérieur pour les pièces.
+    const qty = /^(pièce|gousse|botte|boîte|pot|sachet|tranche)/.test(t.unit) ? Math.ceil(t.qty - 0.01) : t.qty;
+    const quantity = `${formatQty(qty)} ${t.unit}`.trim();
     const existing = next.find((x) => !x.checked && norm(x.name) === norm(t.name));
     if (existing) {
       existing.quantity = existing.quantity ? `${existing.quantity} + ${quantity}` : quantity;

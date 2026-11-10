@@ -1,6 +1,9 @@
-export type MealType = "petit-déjeuner" | "déjeuner" | "dîner" | "dessert" | "goûter";
+export type MealType = "petit-déjeuner" | "entrée" | "plat" | "dessert" | "snack" | "pain & bases";
 
-export const MEAL_TYPES: MealType[] = ["petit-déjeuner", "déjeuner", "dîner", "dessert", "goûter"];
+export const MEAL_TYPES: MealType[] = ["petit-déjeuner", "entrée", "plat", "dessert", "snack", "pain & bases"];
+
+/** Moment de la journée, pour le menu de la semaine. */
+export type Moment = "petit-déjeuner" | "déjeuner" | "dîner";
 
 export type Aisle =
   | "Fruits & légumes"
@@ -67,7 +70,7 @@ export interface Profile {
 
 export interface PlanEntry {
   day: string;
-  meal: MealType;
+  meal: Moment;
   recipe: Recipe;
 }
 

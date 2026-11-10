@@ -16,11 +16,12 @@ export function Onboarding() {
           Bienvenue dans <em>Mijote</em>
         </h1>
         <p className="muted">
-          Des idées de repas 100 % sans gluten, pensées pour tes goûts, ton budget et ton temps. Avec une IA qui ne
-          manque jamais d'imagination.
+          Des idées de repas 100 % sans gluten, pensées pour tes goûts, ton budget et ton temps. Gratuit, même
+          hors connexion.
         </p>
         <ul className="onboarding__list">
-          <li>✨ Des recettes inventées pour toi</li>
+          <li>📚 Plus de 170 recettes : entrées, plats, desserts, snacks…</li>
+          <li>✨ Des suggestions qui s'adaptent à tes goûts</li>
           <li>🗓️ Ton menu de la semaine en un geste</li>
           <li>🧺 La liste de courses qui se remplit toute seule</li>
           <li>🛡️ Les pièges à gluten signalés à chaque ingrédient</li>

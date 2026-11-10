@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { Recipe } from "../types";
 import { euros, formatQty, gradientFor, totalMinutes } from "../utils";
+import { dietLabels } from "../engine";
 import { Chip, Cooking, Sheet } from "./ui";
 
 const REMIXES = ["Plus rapide", "Moins cher", "Version végétarienne", "Plus légère", "Plus épicée", "Sans lactose"];
@@ -120,7 +121,12 @@ export function RecipeDetail({
           </div>
           <div className="tags">
             <span className="tag tag--gf">🌾 Sans gluten</span>
-            {recipe.tags.map((t) => (
+            {dietLabels(recipe).map((d) => (
+              <span key={d} className="tag tag--gf">
+                {d}
+              </span>
+            ))}
+            {recipe.tags.filter((t) => !["végétarien", "vegan"].includes(t)).map((t) => (
               <span key={t} className="tag">
                 {t}
               </span>

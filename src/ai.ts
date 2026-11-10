@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { AISLES, MEAL_TYPES, type MealType, type PlanEntry, type Profile, type Recipe, type Settings } from "./types";
+import { AISLES, MEAL_TYPES, type MealType, type Moment, type PlanEntry, type Profile, type Recipe, type Settings } from "./types";
 import { uid } from "./storage";
 
 const MODEL = "claude-opus-5-5";
@@ -77,7 +77,7 @@ const planSchema = {
         type: "object",
         properties: {
           day: { type: "string", description: "Lundi, Mardi…" },
-          meal: { type: "string", enum: MEAL_TYPES },
+          meal: { type: "string", enum: ["petit-déjeuner", "déjeuner", "dîner"] },
           recipe: recipeSchema,
         },
         required: ["day", "meal", "recipe"],
@@ -219,7 +219,7 @@ Respecte le budget et le temps max.`;
 
 export async function generatePlan(
   ctx: AICtx,
-  opts: { days: number; meals: MealType[]; batchCooking: boolean; extra: string; avoidTitles: string[] },
+  opts: { days: number; meals: Moment[]; batchCooking: boolean; extra: string; avoidTitles: string[] },
 ): Promise<PlanEntry[]> {
   const days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"].slice(0, opts.days);
   const prompt = `${profileBlock(ctx)}
@@ -234,7 +234,7 @@ ${opts.extra ? `- Demande particulière : ${opts.extra}` : ""}
 ${opts.avoidTitles.length ? `- Éviter ces plats déjà vus : ${opts.avoidTitles.slice(0, 30).join(" ; ")}` : ""}
 Recettes concises : 4 à 7 étapes, ${ctx.profile.servings} portions chacune.
 Renvoie une entrée par jour et par repas, dans l'ordre.`;
-  const out = await ask<{ entries: { day: string; meal: MealType; recipe: RawRecipe }[] }>(ctx.settings, prompt, planSchema, 48000);
+  const out = await ask<{ entries: { day: string; meal: Moment; recipe: RawRecipe }[] }>(ctx.settings, prompt, planSchema, 48000);
   return out.entries.map((e) => ({ day: e.day, meal: e.meal, recipe: finalize(e.recipe) }));
 }
 

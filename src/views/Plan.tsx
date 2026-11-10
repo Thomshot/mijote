@@ -1,34 +1,36 @@
 import { useState } from "react";
-import { CalendarDays, KeyRound, RefreshCw, ShoppingBasket, Sparkles } from "lucide-react";
+import { CalendarDays, RefreshCw, ShoppingBasket, Shuffle, Sparkles, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
-import type { MealType } from "../types";
+import type { Moment } from "../types";
 import { AIError, generatePlan } from "../ai";
-import { Chip, Cooking, Empty } from "../components/ui";
+import { buildLocalPlan, swapPlanEntry } from "../engine";
+import { Chip, Cooking } from "../components/ui";
 import { euros, gradientFor, totalMinutes } from "../utils";
 
-export function Plan({ goProfile }: { goProfile: () => void }) {
+export function Plan() {
   const app = useApp();
   const [days, setDays] = useState(5);
-  const [meals, setMeals] = useState<MealType[]>(["dîner"]);
+  const [meals, setMeals] = useState<Moment[]>(["dîner"]);
+  const [useAI, setUseAI] = useState(false);
   const [batch, setBatch] = useState(false);
   const [extra, setExtra] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState(app.plan.length === 0);
 
-  const toggleMeal = (m: MealType) => setMeals(meals.includes(m) ? meals.filter((x) => x !== m) : [...meals, m]);
+  const toggleMeal = (m: Moment) => setMeals(meals.includes(m) ? meals.filter((x) => x !== m) : [...meals, m]);
+  const moments: Moment[] = meals.length ? meals : ["dîner"];
 
   const build = async () => {
-    setLoading(true);
     setError(null);
+    if (!useAI || !app.aiEnabled) {
+      app.setPlan(buildLocalPlan(app.profile, { days, moments, loved: app.aiCtx.loved, recent: app.plan.map((e) => e.recipe.title) }));
+      setEditing(false);
+      return;
+    }
+    setLoading(true);
     try {
-      const entries = await generatePlan(app.aiCtx, {
-        days,
-        meals: meals.length ? meals : ["dîner"],
-        batchCooking: batch,
-        extra,
-        avoidTitles: app.recentTitles,
-      });
+      const entries = await generatePlan(app.aiCtx, { days, meals: moments, batchCooking: batch, extra, avoidTitles: app.recentTitles });
       app.setPlan(entries);
       app.remember(entries.map((e) => e.recipe));
       setEditing(false);
@@ -40,26 +42,10 @@ export function Plan({ goProfile }: { goProfile: () => void }) {
   };
 
   const total = app.plan.reduce((s, e) => s + e.recipe.costPerServing * app.profile.servings, 0);
-  const byDay = app.plan.reduce<Record<string, typeof app.plan>>((acc, e) => {
-    (acc[e.day] ||= []).push(e);
+  const byDay = app.plan.reduce<Record<string, { e: (typeof app.plan)[number]; i: number }[]>>((acc, e, i) => {
+    (acc[e.day] ||= []).push({ e, i });
     return acc;
   }, {});
-
-  if (!app.aiEnabled) {
-    return (
-      <div className="view">
-        <header className="hero">
-          <h1>Menu de la semaine</h1>
-        </header>
-        <Empty emoji="🗓️" title="L'IA prépare tes menus">
-          Active l'IA pour générer un menu complet, équilibré, dans ton budget, avec la liste de courses.
-        </Empty>
-        <button className="btn btn--primary btn--block" onClick={goProfile}>
-          <KeyRound size={18} /> Activer l'IA
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="view">
@@ -73,7 +59,7 @@ export function Plan({ goProfile }: { goProfile: () => void }) {
       </header>
 
       {loading ? (
-        <Cooking label="On compose ta semaine (ça peut prendre une minute)…" />
+        <Cooking label="L'IA compose ta semaine (ça peut prendre une minute)…" />
       ) : editing ? (
         <section className="panel">
           <label className="label">Combien de jours ?</label>
@@ -86,26 +72,38 @@ export function Plan({ goProfile }: { goProfile: () => void }) {
           </div>
           <label className="label">Quels repas ?</label>
           <div className="chips">
-            {(["petit-déjeuner", "déjeuner", "dîner"] as MealType[]).map((m) => (
+            {(["petit-déjeuner", "déjeuner", "dîner"] as Moment[]).map((m) => (
               <Chip key={m} active={meals.includes(m)} onClick={() => toggleMeal(m)}>
                 {m}
               </Chip>
             ))}
           </div>
-          <label className="toggle">
-            <input type="checkbox" checked={batch} onChange={(e) => setBatch(e.target.checked)} />
-            <span>Mode batch cooking (cuisiner moins souvent)</span>
-          </label>
-          <label className="label">Une demande ?</label>
-          <input
-            className="input"
-            value={extra}
-            onChange={(e) => setExtra(e.target.value)}
-            placeholder="Ex : poisson 2 fois, des lunchbox pour le bureau…"
-          />
+
+          {app.aiEnabled && (
+            <label className="toggle">
+              <input type="checkbox" checked={useAI} onChange={(e) => setUseAI(e.target.checked)} />
+              <span>Faire inventer les recettes par l'IA (payant)</span>
+            </label>
+          )}
+          {useAI && app.aiEnabled && (
+            <>
+              <label className="toggle">
+                <input type="checkbox" checked={batch} onChange={(e) => setBatch(e.target.checked)} />
+                <span>Mode batch cooking</span>
+              </label>
+              <input
+                className="input"
+                value={extra}
+                onChange={(e) => setExtra(e.target.value)}
+                placeholder="Une demande ? Ex : poisson 2 fois, lunchbox…"
+              />
+            </>
+          )}
+
           <button className="btn btn--primary btn--block btn--lg" onClick={build}>
-            <Sparkles size={20} /> Générer mon menu
+            {useAI && app.aiEnabled ? <WandSparkles size={20} /> : <Sparkles size={20} />} Générer mon menu
           </button>
+          <p className="muted small">Varié (poisson, volaille, viande, végé), adapté à tes goûts, ton budget et ton temps.</p>
           {app.plan.length > 0 && (
             <button className="link-btn" onClick={() => setEditing(false)}>
               Revenir au menu actuel
@@ -131,19 +129,28 @@ export function Plan({ goProfile }: { goProfile: () => void }) {
               <h2>
                 <CalendarDays size={18} /> {day}
               </h2>
-              {entries.map((e) => (
-                <button key={e.recipe.id} className="plan-row" onClick={() => app.setOpenRecipe(e.recipe)}>
-                  <span className="plan-row__emoji" style={{ background: gradientFor(e.recipe.title) }}>
-                    {e.recipe.emoji}
-                  </span>
-                  <span className="plan-row__text">
-                    <small>{e.meal}</small>
-                    <strong>{e.recipe.title}</strong>
-                    <small className="muted">
-                      {totalMinutes(e.recipe)} min · {euros(e.recipe.costPerServing)}/pers.
-                    </small>
-                  </span>
-                </button>
+              {entries.map(({ e, i }) => (
+                <div key={e.recipe.id + i} className="plan-row">
+                  <button className="plan-row__main" onClick={() => app.setOpenRecipe(e.recipe)}>
+                    <span className="plan-row__emoji" style={{ background: gradientFor(e.recipe.title) }}>
+                      {e.recipe.emoji}
+                    </span>
+                    <span className="plan-row__text">
+                      <small>{e.meal}</small>
+                      <strong>{e.recipe.title}</strong>
+                      <small className="muted">
+                        {totalMinutes(e.recipe)} min · {euros(e.recipe.costPerServing)}/pers.
+                      </small>
+                    </span>
+                  </button>
+                  <button
+                    className="icon-btn"
+                    aria-label="Changer ce repas"
+                    onClick={() => app.setPlan(swapPlanEntry(app.profile, app.plan, i, app.aiCtx.loved))}
+                  >
+                    <Shuffle size={16} />
+                  </button>
+                </div>
               ))}
             </section>
           ))}
