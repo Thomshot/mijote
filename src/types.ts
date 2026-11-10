@@ -52,6 +52,10 @@ export interface Recipe {
   glutenTips: string[];
   source: "bibliothèque" | "ia";
   createdAt: number;
+  /** Chemin de la photo (recettes de la bibliothèque) */
+  image?: string;
+  /** Crédit photo (licence Creative Commons) */
+  photoCredit?: string;
 }
 
 export interface Profile {

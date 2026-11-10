@@ -19,6 +19,7 @@ function useAppState() {
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
   const [cooking, setCooking] = useState<Recipe | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [love, setLove] = useState(false);
 
   const notify = (msg: string) => {
     setToast(msg);
@@ -86,6 +87,8 @@ function useAppState() {
     setCooking,
     toast,
     notify,
+    love,
+    setLove,
     isFavorite,
     toggleFavorite,
     remember,

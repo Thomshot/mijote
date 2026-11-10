@@ -14,6 +14,7 @@ import {
   ThumbsUp,
   TriangleExclamationPoint,
   Users,
+  X,
 } from "lucide-react";
 import type { Recipe } from "../types";
 import { euros, formatQty, gradientFor, totalMinutes } from "../utils";
@@ -87,7 +88,11 @@ export function RecipeDetail({
     >
       <div className="detail">
         <div className="detail__cover" style={{ background: gradientFor(recipe.title) }}>
-          <span>{recipe.emoji}</span>
+          {recipe.image ? <img src={recipe.image} alt={recipe.title} /> : <span>{recipe.emoji}</span>}
+          <button className="detail__close" onClick={onClose} aria-label="Fermer">
+            <X size={20} />
+          </button>
+          {recipe.photoCredit && <small className="detail__credit">{recipe.photoCredit}</small>}
         </div>
         <div className="detail__head">
           <div className="detail__kicker">

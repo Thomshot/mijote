@@ -1,4 +1,7 @@
 import type { Aisle, Ingredient, MealType, Recipe } from "../../types";
+import photos from "../photos.json";
+
+const PHOTOS = photos as Record<string, { creator: string; license: string; url: string }>;
 
 const AISLE_CODES: Record<string, Aisle> = {
   L: "Fruits & légumes",
@@ -56,6 +59,8 @@ function ing(spec: string): Ingredient {
 const slug = (s: string) =>
   s
     .toLowerCase()
+    .replace(/œ/g, "oe")
+    .replace(/æ/g, "ae")
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
@@ -83,8 +88,12 @@ export function R(
   steps: string[],
   glutenTips: string[] = [],
 ): Recipe {
+  const key = slug(title);
+  const photo = PHOTOS[key];
   return {
-    id: "db-" + slug(title),
+    id: "db-" + key,
+    image: photo ? `img/${key}.webp` : undefined,
+    photoCredit: photo ? `Photo : ${photo.creator} · ${photo.license}` : undefined,
     title,
     emoji,
     description,

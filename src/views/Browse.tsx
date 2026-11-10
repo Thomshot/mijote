@@ -42,6 +42,7 @@ export function Browse() {
           onChange={(e) => {
             setQ(e.target.value);
             reset();
+            if (/bebew|je t.?aime/i.test(e.target.value)) app.setLove(true);
           }}
           placeholder="Plat, ingrédient, cuisine…"
         />

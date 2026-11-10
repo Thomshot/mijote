@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BookOpen, Refrigerator, Shuffle, Sparkles, User, WandSparkles } from "lucide-react";
+import { BookOpen, CalendarDays, Refrigerator, Shuffle, Sparkles, User, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
 import { MEAL_TYPES, type MealType, type Recipe } from "../types";
 import { adaptRecipe, AIError, generateIdeas } from "../ai";
@@ -22,7 +22,7 @@ function defaultMeal(): MealType {
   return "plat";
 }
 
-export function Discover({ goProfile }: { goProfile: () => void }) {
+export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu: () => void }) {
   const app = useApp();
   const [meal, setMeal] = useState<MealType>(defaultMeal);
   const [craving, setCraving] = useState("");
@@ -35,6 +35,14 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
   const [adaptText, setAdaptText] = useState("");
   const [adapting, setAdapting] = useState(false);
   const [shown, setShown] = useState<string[]>([]);
+  const [taps, setTaps] = useState(0);
+
+  // Easter egg : 5 tapes sur « mijote »
+  const tapTitle = () => {
+    const n = taps + 1;
+    setTaps(n >= 5 ? 0 : n);
+    if (n >= 5) app.setLove(true);
+  };
 
   const criteria = () => ({ mealType: meal, craving, fridge: showFridge ? fridge : "", loved: app.aiCtx.loved });
 
@@ -106,7 +114,7 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
         <div>
           <p className="hero__kicker">{greeting(app.profile.name)} 👋</p>
           <h1>
-            Qu'est-ce qu'on <em>mijote</em> ?
+            Qu'est-ce qu'on <em onClick={tapTitle}>mijote</em> ?
           </h1>
         </div>
         <button className="icon-btn icon-btn--lg" onClick={goProfile} aria-label="Profil">
@@ -163,6 +171,26 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
         {error && <p className="error">{error}</p>}
       </section>
 
+      <section className="tools">
+        <button className="tool" onClick={goMenu}>
+          <CalendarDays size={22} />
+          <strong>Menu de la semaine</strong>
+          <small>Tes repas planifiés et la liste de courses en un geste</small>
+        </button>
+        {app.aiEnabled && (
+          <button className="tool" onClick={() => setAdaptOpen(true)}>
+            <WandSparkles size={22} />
+            <strong>Adapter une recette</strong>
+            <small>Colle n'importe quelle recette, l'IA la rend sans gluten</small>
+          </button>
+        )}
+        <button className="tool" onClick={() => setGuideOpen(true)}>
+          <BookOpen size={22} />
+          <strong>Guide sans gluten</strong>
+          <small>Substitutions et pièges à éviter</small>
+        </button>
+      </section>
+
       {aiLoading && <Cooking />}
 
       {!aiLoading && app.ideas.length > 0 && (
@@ -214,18 +242,6 @@ export function Discover({ goProfile }: { goProfile: () => void }) {
         <p className="muted small center">Sélectionnées pour toi parmi {RECIPE_COUNT} recettes sans gluten, selon tes goûts, ton budget et ton temps.</p>
       </section>
 
-      <section className="tools">
-        <button className="tool" onClick={() => (app.aiEnabled ? setAdaptOpen(true) : goProfile())}>
-          <WandSparkles size={22} />
-          <strong>Adapter une recette</strong>
-          <small>{app.aiEnabled ? "Colle n'importe quelle recette, l'IA la rend sans gluten" : "Option IA : à activer dans le profil"}</small>
-        </button>
-        <button className="tool" onClick={() => setGuideOpen(true)}>
-          <BookOpen size={22} />
-          <strong>Guide sans gluten</strong>
-          <small>Substitutions et pièges à éviter</small>
-        </button>
-      </section>
 
       <Sheet open={adaptOpen} onClose={() => !adapting && setAdaptOpen(false)} title="Adapter une recette">
         {adapting ? (

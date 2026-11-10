@@ -93,16 +93,40 @@ const stem = (w: string) => {
   return n.length > 5 ? n.slice(0, Math.max(5, n.length - 2)) : n.replace(/s$/, "");
 };
 
-function hitsDislike(r: Recipe, dislike: string) {
-  const d = norm(dislike);
-  const f = flagsOf(r);
-  if (d === "poisson") return f.fish;
-  if (d.includes("fruits de mer")) return r.ingredients.some((i) => has(norm(i.name), SEAFOOD));
-  if (d === "viande") return f.meat;
-  if (d.includes("epice") || d.includes("piment")) return r.tags.includes("épicé");
-  const s = stem(d);
-  return r.ingredients.some((i) => norm(i.name).includes(s)) || norm(r.title).includes(s);
+const CHEESE = ["fromage", "parmesan", "mozzarella", "feta", "chevre", "emmental", "comte", "cheddar", "reblochon", "burrata", "ricotta", "mascarpone", "pecorino", "crottin", "halloumi"];
+const ingNames = (r: Recipe) => r.ingredients.map((i) => norm(i.name));
+
+/**
+ * Groupes de mots compris par l'appli, en plus de la recherche mot à mot.
+ * Tout est comparé sans majuscules ni accents, au singulier : « Riz », « riz » et « RIZ » sont identiques.
+ */
+const GROUPS: [RegExp, (r: Recipe) => boolean][] = [
+  [/^poissons?$/, (r) => ingNames(r).some((n) => has(n, FISH.filter((f) => !SEAFOOD.includes(f))))],
+  [/fruits? de mer|crustace|coquillage/, (r) => ingNames(r).some((n) => has(n, SEAFOOD))],
+  [/^viandes?$/, (r) => flagsOf(r).meat],
+  [/viande rouge/, (r) => ingNames(r).some((n) => has(n, ["boeuf", "agneau", "veau", "steak", "paleron", "rumsteck"]))],
+  [/volaille/, (r) => ingNames(r).some((n) => has(n, ["poulet", "dinde", "canard"]))],
+  [/^porc|cochon/, (r) => flagsOf(r).pork],
+  [/^fromages?$/, (r) => ingNames(r).some((n) => has(n, CHEESE))],
+  [/laitier|lactose/, (r) => flagsOf(r).dairy],
+  [/^oeufs?$/, (r) => flagsOf(r).egg],
+  [/fruits? a coque|^noix$/, (r) => flagsOf(r).nuts],
+  [/legumineuse|legumes secs/, (r) => ingNames(r).some((n) => has(n, ["lentille", "pois chiche", "haricots rouges", "haricots blancs", "haricots noirs"]))],
+  [/epice|piment|pimente|fort/, (r) => r.tags.includes("épicé")],
+  [/sucre/, (r) => r.mealType === "dessert" || r.mealType === "snack"],
+];
+
+/** Vrai si la recette correspond au mot (aliment, cuisine, groupe). `strict` : ingrédients et titre seulement. */
+export function matchesTerm(r: Recipe, term: string, strict = false) {
+  const t = norm(term).replace(/^cuisine /, "");
+  const group = GROUPS.find(([re]) => re.test(t));
+  if (group) return group[1](r);
+  const s = stem(t);
+  if (strict) return ingNames(r).some((n) => n.includes(s)) || norm(r.title).includes(s);
+  return searchText(r).includes(s);
 }
+
+const hitsDislike = (r: Recipe, dislike: string) => matchesTerm(r, dislike, true);
 
 export function allowedFor(profile: Profile, recipes: Recipe[] = RECIPES) {
   return recipes.filter((r) => respectsDiets(r, profile.diets) && !profile.dislikes.some((d) => hitsDislike(r, d)));
@@ -132,9 +156,8 @@ export const CRAVING_RULES: Record<string, (r: Recipe) => boolean> = {
 };
 
 function score(r: Recipe, profile: Profile, c: Criteria, fridgeWords: string[]) {
-  const text = searchText(r);
   let s = Math.random() * 3; // un peu de hasard pour varier
-  for (const like of profile.likes) if (text.includes(stem(like))) s += 3;
+  for (const like of profile.likes) if (matchesTerm(r, like)) s += 3;
   if (c.loved?.includes(r.title)) s += 2;
   const over = r.costPerServing - profile.budgetPerServing;
   if (over > 0) s -= over * 2;

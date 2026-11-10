@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Clock, Euro, Heart, Sparkles, X } from "lucide-react";
 import type { Recipe } from "../types";
 import { euros, gradientFor, totalMinutes } from "../utils";
@@ -19,7 +19,16 @@ export function Chip({
   );
 }
 
+/**
+ * Panneau qui monte du bas. On le ferme en le faisant glisser vers le bas
+ * (quand on est en haut du contenu), en touchant le fond, ou avec la croix.
+ */
 export function Sheet({ open, onClose, children, title }: { open: boolean; onClose: () => void; children: ReactNode; title?: string }) {
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -28,10 +37,73 @@ export function Sheet({ open, onClose, children, title }: { open: boolean; onClo
       document.body.style.overflow = prev;
     };
   }, [open]);
+
+  useEffect(() => {
+    const sheet = sheetRef.current;
+    const backdrop = backdropRef.current;
+    if (!open || !sheet || !backdrop) return;
+    let startY = 0;
+    let startT = 0;
+    let dy = 0;
+    let tracking = false;
+    let dragging = false;
+
+    const setOffset = (y: number, animate: boolean) => {
+      sheet.style.transition = animate ? "transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1)" : "none";
+      sheet.style.transform = y ? `translateY(${y}px)` : "";
+      backdrop.style.transition = animate ? "background-color 0.25s" : "none";
+      backdrop.style.backgroundColor = `rgba(20, 12, 6, ${0.45 * Math.max(0, 1 - y / 500)})`;
+    };
+
+    const onStart = (e: TouchEvent) => {
+      // On ne déclenche le glissement que si le contenu est tout en haut.
+      tracking = sheet.scrollTop <= 0;
+      dragging = false;
+      startY = e.touches[0].clientY;
+      startT = Date.now();
+      dy = 0;
+    };
+    const onMove = (e: TouchEvent) => {
+      if (!tracking) return;
+      dy = e.touches[0].clientY - startY;
+      if (!dragging) {
+        if (dy > 6 && sheet.scrollTop <= 0) dragging = true;
+        else if (dy < 0) {
+          tracking = false;
+          return;
+        } else return;
+      }
+      e.preventDefault(); // empêche le rebond de défilement d'iOS pendant le glissement
+      setOffset(Math.max(0, dy), false);
+    };
+    const onEnd = () => {
+      if (!dragging) return;
+      dragging = tracking = false;
+      const fast = dy > 60 && Date.now() - startT < 250;
+      if (dy > 130 || fast) {
+        setOffset(window.innerHeight, true);
+        window.setTimeout(() => closeRef.current(), 220);
+      } else {
+        setOffset(0, true);
+      }
+    };
+
+    sheet.addEventListener("touchstart", onStart, { passive: true });
+    sheet.addEventListener("touchmove", onMove, { passive: false });
+    sheet.addEventListener("touchend", onEnd);
+    sheet.addEventListener("touchcancel", onEnd);
+    return () => {
+      sheet.removeEventListener("touchstart", onStart);
+      sheet.removeEventListener("touchmove", onMove);
+      sheet.removeEventListener("touchend", onEnd);
+      sheet.removeEventListener("touchcancel", onEnd);
+    };
+  }, [open]);
+
   if (!open) return null;
   return (
-    <div className="sheet-backdrop" onClick={onClose}>
-      <div className="sheet" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+    <div className="sheet-backdrop" ref={backdropRef} onClick={onClose}>
+      <div className="sheet" ref={sheetRef} onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
         <div className="sheet__grip" />
         {title && (
           <div className="sheet__head">
@@ -63,7 +135,11 @@ export function RecipeCard({
   return (
     <article className={`card ${compact ? "card--compact" : ""}`} onClick={onOpen}>
       <div className="card__cover" style={{ background: gradientFor(recipe.title) }}>
-        <span className="card__emoji">{recipe.emoji}</span>
+        {recipe.image ? (
+          <img className="card__img" src={recipe.image} alt="" loading="lazy" decoding="async" />
+        ) : (
+          <span className="card__emoji">{recipe.emoji}</span>
+        )}
         {recipe.source === "ia" && (
           <span className="badge badge--ai">
             <Sparkles size={12} /> IA

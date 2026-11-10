@@ -26,11 +26,13 @@ Un moteur de suggestions local choisit les recettes selon le profil :
 
 ## Fonctionnalités
 
+- 📷 **Scanner de code-barres** : on scanne un produit au supermarché et l'appli indique s'il contient du gluten (✅ label sans gluten, 🟢 probablement sans gluten, ⚠️ traces possibles ou avoine non certifiée, ⛔ contient du gluten). Les ingrédients en cause sont surlignés. Les données viennent d'[Open Food Facts](https://fr.openfoodfacts.org) (gratuit, collaboratif), le décodage du code-barres de ZXing, et l'historique des scans est conservé.
+- 🖼️ **Une photo pour chaque recette** (Wikimedia Commons / Flickr, licences libres, crédit affiché sur chaque fiche).
+
 - ✨ **Inspire-moi** : 6 suggestions instantanées selon la catégorie, l'envie (réconfortant, rapide, petit budget, chocolat…) et les goûts.
 - 📚 **Recettes** : recherche dans toute la base, avec filtres catégorie, ≤ 30 min, ≤ 2 €/pers., végé et « mes goûts ».
 - 🧊 **Mode frigo** : indique ce que tu as sous la main, les recettes qui l'utilisent passent en premier.
 - 🗓️ **Menu de la semaine** : 3, 5 ou 7 jours, varié (poisson, volaille, viande, végé), avec le budget total. 🔀 pour changer un repas.
-- 🤖 **IA en option (payant)** : inventer des recettes inédites, adapter n'importe quelle recette en sans gluten, remixer (« plus rapide », « végé »…).
 - 🧺 **Liste de courses** : se remplit depuis une recette ou depuis le menu, triée par rayon, avec fusion des doublons. On peut la partager.
 - 🛡️ **Vigilance gluten** : les pièges sont signalés ingrédient par ingrédient (bouillon, sauce soja, épices…), avec des conseils contre la contamination croisée.
 - 👨‍🍳 **Mode cuisine** : une étape par écran en grand, minuteurs détectés automatiquement, écran qui reste allumé.
@@ -43,14 +45,7 @@ Un moteur de suggestions local choisit les recettes selon le profil :
 
 1. Ouvrir **https://thomshot.github.io/mijote/** dans **Safari**.
 2. Toucher **Partager** puis **« Sur l'écran d'accueil »**.
-3. C'est tout. Pour l'option IA : **Profil** (icône en haut de l'accueil), puis **IA (optionnel)**, et coller une clé API Claude.
-
-### La clé API (optionnelle)
-
-- À créer sur https://console.anthropic.com (rubrique *API Keys*), après avoir ajouté quelques euros de crédit.
-- La clé est enregistrée **uniquement sur le téléphone** (localStorage). Elle n'est jamais dans le code ni sur GitHub.
-- Modèle utilisé : `claude-opus-5-5` en effort `low`. Une génération de 4 recettes coûte de l'ordre de quelques centimes ; un menu de 7 jours, un peu plus.
-- Conseil : fixe une limite de dépense mensuelle dans la console Anthropic.
+3. C'est tout. Pour scanner, autoriser l'accès à la caméra quand l'appli le demande.
 
 ## Développement
 
@@ -68,7 +63,9 @@ Le déploiement est automatique à chaque push sur `main` (GitHub Actions vers G
 |---|---|
 | `src/data/db/*` | Base de recettes (format compact décrit dans `helpers.ts`) |
 | `src/engine.ts` | Moteur de suggestions et menu de la semaine (local) |
-| `src/ai.ts` | Option IA : prompts, schémas JSON et appels à Claude |
+| `src/scanner/*` | Lecture du code-barres et analyse gluten (Open Food Facts) |
+| `scripts/fetch-images.mjs` | Récupération des photos (`image-queries.json`, `image-picks.json`) |
+| `src/ai.ts` | Module IA (Claude), désactivé dans l'interface |
 | `src/data/swaps.ts` | Guide des substitutions |
 | `src/views/*` | Écrans (Découvrir, Menu, Courses, Carnet, Profil) |
 | `src/components/*` | Fiche recette, mode cuisine, UI |

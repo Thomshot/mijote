@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { Check, ChevronLeft, KeyRound, Smartphone } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { useApp } from "../state";
-import type { Profile as P, Settings } from "../types";
-import { AIError, testKey } from "../ai";
+import type { Profile as P } from "../types";
 import { Chip, TagInput } from "../components/ui";
 
 export const LIKE_SUGGESTIONS = [
@@ -87,77 +85,6 @@ export function PreferencesForm({ profile, onChange }: { profile: P; onChange: (
   );
 }
 
-function AISettings() {
-  const { settings, setSettings, notify } = useApp();
-  const [key, setKey] = useState(settings.apiKey);
-  const [status, setStatus] = useState<"idle" | "testing" | "ok" | "error">("idle");
-  const [msg, setMsg] = useState("");
-
-  const save = async () => {
-    setStatus("testing");
-    try {
-      await testKey(key.trim());
-      setSettings({ ...settings, apiKey: key.trim() });
-      setStatus("ok");
-      notify("IA activée ✨");
-    } catch (e) {
-      setStatus("error");
-      setMsg(e instanceof AIError ? e.message : "Clé invalide ou pas de connexion.");
-    }
-  };
-
-  return (
-    <section className="panel">
-      <h2>
-        <KeyRound size={18} /> IA (optionnel)
-      </h2>
-      <p className="muted small">
-        L'appli est 100 % gratuite sans IA. En bonus, une clé API Claude (console.anthropic.com, payant à l'usage) permet
-        d'inventer des recettes inédites, d'adapter n'importe quelle recette et de la remixer. La clé reste sur ce téléphone.
-      </p>
-      <div className="inline-form">
-        <input
-          className="input"
-          type="password"
-          autoComplete="off"
-          value={key}
-          onChange={(e) => {
-            setKey(e.target.value);
-            setStatus("idle");
-          }}
-          placeholder="sk-ant-…"
-        />
-        <button className="btn btn--primary" onClick={save} disabled={!key.trim() || status === "testing"}>
-          {status === "testing" ? "…" : status === "ok" ? <Check size={18} /> : "OK"}
-        </button>
-      </div>
-      {status === "error" && <p className="error">{msg}</p>}
-      {settings.apiKey && status !== "error" && <p className="ok small">✓ IA active</p>}
-
-      <label className="label">Créativité</label>
-      <div className="chips">
-        {(["classique", "équilibrée", "audacieuse"] as Settings["creativity"][]).map((c) => (
-          <Chip key={c} active={settings.creativity === c} onClick={() => setSettings({ ...settings, creativity: c })}>
-            {c === "classique" ? "🏡 " : c === "équilibrée" ? "⚖️ " : "🚀 "}
-            {c}
-          </Chip>
-        ))}
-      </div>
-      {settings.apiKey && (
-        <button
-          className="link-btn"
-          onClick={() => {
-            setSettings({ ...settings, apiKey: "" });
-            setKey("");
-          }}
-        >
-          Supprimer la clé
-        </button>
-      )}
-    </section>
-  );
-}
-
 export function Profile({ onBack }: { onBack: () => void }) {
   const app = useApp();
   return (
@@ -172,22 +99,6 @@ export function Profile({ onBack }: { onBack: () => void }) {
       <section className="panel">
         <h2>Goûts & contraintes</h2>
         <PreferencesForm profile={app.profile} onChange={app.setProfile} />
-      </section>
-      <AISettings />
-      <section className="panel">
-        <h2>
-          <Smartphone size={18} /> Installer sur l'iPhone
-        </h2>
-        <ol className="small install">
-          <li>Ouvrir cette page dans <strong>Safari</strong>.</li>
-          <li>
-            Toucher le bouton <strong>Partager</strong> (carré avec une flèche).
-          </li>
-          <li>
-            Choisir <strong>« Sur l'écran d'accueil »</strong>.
-          </li>
-          <li>Mijote s'ouvre ensuite en plein écran, comme une vraie appli.</li>
-        </ol>
       </section>
       <section className="panel">
         <h2>Données</h2>

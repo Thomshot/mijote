@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { BookOpen, CalendarDays, Heart, ShoppingBasket, Sparkles } from "lucide-react";
+import { BookOpen, Heart, ScanBarcode, ShoppingBasket, Sparkles } from "lucide-react";
 import { AppProvider, useApp } from "./state";
 import { Discover } from "./views/Discover";
 import { Plan } from "./views/Plan";
 import { Browse } from "./views/Browse";
+import { Scanner } from "./views/Scanner";
+import { LoveEgg } from "./components/LoveEgg";
 import { Shopping } from "./views/Shopping";
 import { Favorites } from "./views/Favorites";
 import { Profile } from "./views/Profile";
@@ -13,12 +15,12 @@ import { CookMode } from "./components/CookMode";
 import { AIError, remixRecipe } from "./ai";
 import { haptic } from "./utils";
 
-type Tab = "decouvrir" | "recettes" | "menu" | "courses" | "carnet" | "profil";
+type Tab = "decouvrir" | "recettes" | "scanner" | "menu" | "courses" | "carnet" | "profil";
 
 const TABS: { id: Tab; label: string; icon: typeof Sparkles }[] = [
   { id: "decouvrir", label: "Découvrir", icon: Sparkles },
   { id: "recettes", label: "Recettes", icon: BookOpen },
-  { id: "menu", label: "Menu", icon: CalendarDays },
+  { id: "scanner", label: "Scanner", icon: ScanBarcode },
   { id: "courses", label: "Courses", icon: ShoppingBasket },
   { id: "carnet", label: "Carnet", icon: Heart },
 ];
@@ -40,9 +42,10 @@ function Shell() {
   return (
     <>
       <main className="app">
-        {tab === "decouvrir" && <Discover goProfile={goProfile} />}
+        {tab === "decouvrir" && <Discover goProfile={goProfile} goMenu={() => setTab("menu")} />}
         {tab === "recettes" && <Browse />}
-        {tab === "menu" && <Plan />}
+        {tab === "scanner" && <Scanner />}
+        {tab === "menu" && <Plan onBack={() => setTab("decouvrir")} />}
         {tab === "courses" && <Shopping />}
         {tab === "carnet" && <Favorites />}
         {tab === "profil" && <Profile onBack={() => setTab("decouvrir")} />}
@@ -52,7 +55,7 @@ function Shell() {
         {TABS.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
-            className={`tabbar__btn ${tab === id ? "is-active" : ""}`}
+            className={`tabbar__btn ${tab === id || (id === "decouvrir" && (tab === "menu" || tab === "profil")) ? "is-active" : ""} ${id === "scanner" ? "tabbar__btn--scan" : ""}`}
             onClick={() => {
               haptic();
               setTab(id);
@@ -98,6 +101,7 @@ function Shell() {
       {app.cooking && <CookMode recipe={app.cooking} onClose={() => app.setCooking(null)} />}
 
       {app.toast && <div className="toast">{app.toast}</div>}
+      {app.love && <LoveEgg onClose={() => app.setLove(false)} />}
     </>
   );
 }

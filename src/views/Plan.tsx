@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalendarDays, RefreshCw, ShoppingBasket, Shuffle, Sparkles, WandSparkles } from "lucide-react";
+import { CalendarDays, ChevronLeft, RefreshCw, ShoppingBasket, Shuffle, Sparkles, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
 import type { Moment } from "../types";
 import { AIError, generatePlan } from "../ai";
@@ -7,7 +7,7 @@ import { buildLocalPlan, swapPlanEntry } from "../engine";
 import { Chip, Cooking } from "../components/ui";
 import { euros, gradientFor, totalMinutes } from "../utils";
 
-export function Plan() {
+export function Plan({ onBack }: { onBack: () => void }) {
   const app = useApp();
   const [days, setDays] = useState(5);
   const [meals, setMeals] = useState<Moment[]>(["dîner"]);
@@ -50,6 +50,9 @@ export function Plan() {
   return (
     <div className="view">
       <header className="hero">
+        <button className="link-btn" onClick={onBack}>
+          <ChevronLeft size={16} /> Retour
+        </button>
         <h1>Menu de la semaine</h1>
         {app.plan.length > 0 && !editing && (
           <p className="muted">
@@ -133,7 +136,7 @@ export function Plan() {
                 <div key={e.recipe.id + i} className="plan-row">
                   <button className="plan-row__main" onClick={() => app.setOpenRecipe(e.recipe)}>
                     <span className="plan-row__emoji" style={{ background: gradientFor(e.recipe.title) }}>
-                      {e.recipe.emoji}
+                      {e.recipe.image ? <img src={e.recipe.image} alt="" loading="lazy" /> : e.recipe.emoji}
                     </span>
                     <span className="plan-row__text">
                       <small>{e.meal}</small>
