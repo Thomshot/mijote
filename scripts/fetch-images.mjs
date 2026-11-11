@@ -1,7 +1,8 @@
 // Récupère une photo libre de droits (Openverse : Flickr, Wikimedia…) pour chaque recette.
 // Usage : node scripts/fetch-images.mjs [id...]
 // - scripts/image-queries.json : id -> requête (anglais)
-// - scripts/image-picks.json   : id -> index du candidat choisi, ou requête de remplacement
+// - scripts/image-picks.json   : id -> index du candidat choisi, "requête#File:titre exact" (Commons)
+//                                ou "ov:<identifiant>" (Openverse : Flickr en Creative Commons…)
 // Sortie : public/img/<id>.webp + src/data/photos.json (crédits, obligatoires pour CC BY).
 import fs from "node:fs";
 import sharp from "sharp";
@@ -93,8 +94,23 @@ const save = () => {
   fs.writeFileSync(creditsFile, JSON.stringify(credits, null, 1));
 };
 
+/** Photo choisie sur Openverse (Flickr en Creative Commons…) : sélection "ov:<identifiant>". */
+async function processOpenverse(id, ovId) {
+  const res = await fetch(`https://api.openverse.org/v1/images/${ovId}/`, { headers: UA });
+  if (!res.ok) throw new Error(`Openverse ${res.status}`);
+  const x = await res.json();
+  const img = await download({ url: x.url, thumb: x.thumbnail });
+  if (!img) throw new Error("téléchargement impossible");
+  fs.writeFileSync(`public/img/${id}.webp`, img);
+  const license = `CC ${x.license.toUpperCase()} ${x.license_version ?? ""}`.replace(/^CC (CC0|PDM)/, "$1").trim();
+  credits[id] = { creator: (x.creator || "inconnu").slice(0, 60), license, url: x.foreign_landing_url };
+  console.log(`${++n}/${ids.length} ✓ ${id} (Openverse : ${x.provider})`);
+  save();
+}
+
 async function processOne(id) {
   const pick = picks[id];
+  if (typeof pick === "string" && pick.startsWith("ov:")) return processOpenverse(id, pick.slice(3));
   // Une sélection peut être "requête#morceau du titre" pour choisir une photo précise.
   const [pq, wanted] = typeof pick === "string" ? pick.split("#") : [undefined, undefined];
   const q = pq ?? queries[id];
