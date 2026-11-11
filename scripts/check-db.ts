@@ -2,6 +2,7 @@
 import { RECIPES } from "../src/data/db/index";
 import { flagsOf, allowedFor, suggest, buildLocalPlan } from "../src/engine";
 import { DEFAULT_PROFILE } from "../src/defaults";
+import { catalogFor } from "../src/data/productCatalog";
 
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 const RISKY = ["ble", "orge", "seigle", "epeautre", "kamut", "malt", "semoule", "boulgour", "couscous", "seitan", "sauce soja", "chapelure", "pates", "pate ", "spaghetti", "tagliatelle", "lasagne", "pain", "biscuit", "tortilla", "nouilles", "biere", "avoine", "crozets", "gnocchi"];
@@ -21,6 +22,13 @@ for (const r of RECIPES) {
     }
   }
 }
+// Ingrédients sensibles sans entrée dans le catalogue produits (src/data/productCatalog.ts)
+const NO_PRODUCT = ["huile de friture", "vinaigre de xérès"]; // conseil d'usage, pas de produit à recommander
+const missing = new Set<string>();
+for (const r of RECIPES)
+  for (const i of r.ingredients)
+    if ((i.glutenNote || i.aisle === "Épicerie sans gluten") && !catalogFor(i.name) && !NO_PRODUCT.includes(i.name.toLowerCase())) missing.add(i.name);
+if (missing.size) { console.log("SANS REPÈRE PRODUIT (ajouter au catalogue) :", [...missing].join(", ")); problems += missing.size; }
 const byCat: Record<string, number> = {};
 RECIPES.forEach((r) => (byCat[r.mealType] = (byCat[r.mealType] ?? 0) + 1));
 console.log("Total", RECIPES.length, byCat);

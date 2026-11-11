@@ -21,6 +21,7 @@ import { euros, formatQty, gradientFor, totalMinutes } from "../utils";
 import { dietLabels, isInSeason } from "../engine";
 import { useApp } from "../state";
 import { Chip, Cooking, Sheet } from "./ui";
+import { ProductHint } from "./ProductHint";
 
 const REMIXES = ["Plus rapide", "Moins cher", "Version végétarienne", "Plus légère", "Plus épicée", "Sans lactose"];
 
@@ -187,6 +188,7 @@ export function RecipeDetail({
                     </small>
                   )}
                 </span>
+                <ProductHint name={ing.name} />
               </li>
             ))}
           </ul>

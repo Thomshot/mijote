@@ -1,0 +1,1532 @@
+{
+ "fecule-mais": [
+  {
+   "code": "8713445020282",
+   "brand": "Joannus molen",
+   "name": "Amidon de maïs",
+   "quantity": "250 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/871/344/502/0282/front_fr.60.200.jpg"
+  },
+  {
+   "code": "3380380055355",
+   "brand": "Ma vie sans gluten",
+   "name": "Fécule De Maïs Bio - 500 G - Ma Vie Sans Gluten",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/338/038/005/5355/front_fr.13.200.jpg"
+  },
+  {
+   "code": "3760130560597",
+   "brand": "Mon fournil",
+   "name": "Fécule de maïs bio",
+   "quantity": "25 0g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/013/056/0597/front_fr.39.200.jpg"
+  }
+ ],
+ "fecule-pdt": [
+  {
+   "code": "3700566431047",
+   "brand": "Les Recettes de Céliane",
+   "name": "Fécule de pomme de terre",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/370/056/643/1047/front_fr.6.200.jpg"
+  },
+  {
+   "code": "3380380076053",
+   "brand": "ma vie sans gluten",
+   "name": "Fécule De Pomme De Terre Bio - 500 G - Ma Vie Sans Gluten",
+   "quantity": "500g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/338/038/007/6053/front_fr.9.200.jpg"
+  },
+  {
+   "code": "8713445021012",
+   "brand": "Bioculinair",
+   "name": "Fécule de pomme de terre",
+   "quantity": "250g",
+   "stores": [
+    "La Vie Claire"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/871/344/502/1012/front_fr.24.200.jpg"
+  }
+ ],
+ "farine-riz": [
+  {
+   "code": "3760130560726",
+   "brand": "Non Fournil",
+   "name": "Farine complète de riz bio sans gluten",
+   "quantity": "400 g",
+   "stores": [
+    "Intermarché",
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/013/056/0726/front_en.48.200.jpg"
+  },
+  {
+   "code": "3329486605002",
+   "brand": "Markal",
+   "name": "Farine de Riz",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/660/5002/front_fr.24.200.jpg"
+  },
+  {
+   "code": "3760215380379",
+   "brand": "Graines d'Alisa",
+   "name": "Farine de riz complet",
+   "quantity": "1kg",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/021/538/0379/front_fr.24.200.jpg"
+  }
+ ],
+ "farine-sarrasin": [
+  {
+   "code": "3596710474431",
+   "brand": "Auchan",
+   "name": "Farine de sarrasin",
+   "quantity": "1 kg",
+   "stores": [
+    "Auchan"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/359/671/047/4431/front_fr.76.200.jpg"
+  },
+  {
+   "code": "3329486231201",
+   "brand": "Markal",
+   "name": "Farine de Sarrasin Intégrale",
+   "quantity": "500 g",
+   "stores": [
+    "Naturalia"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/623/1201/front_en.33.200.jpg"
+  },
+  {
+   "code": "3558630113005",
+   "brand": "Biocoop",
+   "name": "Farine de sarrasin T130",
+   "quantity": "1 kg",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/355/863/011/3005/front_fr.44.200.jpg"
+  }
+ ],
+ "farine-pois-chiche": [
+  {
+   "code": "3760130560900",
+   "brand": "Mon fournil",
+   "name": "Farine de pois chiche bio sans gluten",
+   "quantity": "500 g",
+   "stores": [
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/013/056/0900/front_en.42.200.jpg"
+  },
+  {
+   "code": "3760215380218",
+   "brand": "Graines d'Alisa",
+   "name": "Farine De Pois Chiche",
+   "quantity": "500 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/021/538/0218/front_fr.27.200.jpg"
+  },
+  {
+   "code": "3329486201204",
+   "brand": "Markal",
+   "name": "Farine de pois chiches",
+   "quantity": "500 g",
+   "stores": [
+    "Greenweez",
+    "Naturalia"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/620/1204/front_fr.33.200.jpg"
+  }
+ ],
+ "levure-chimique": [
+  {
+   "code": "8712100724572",
+   "brand": "Alsa",
+   "name": "Levure Chimique Alsacienne",
+   "quantity": "88 g (8x11g)",
+   "stores": [
+    "Auchan",
+    "Carrefour",
+    "Leclerc",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/871/210/072/4572/front_en.195.200.jpg"
+  },
+  {
+   "code": "3278584930021",
+   "brand": "Culinat",
+   "name": "Poudre à lever sans phosphate & sans gluten",
+   "quantity": "10 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/327/858/493/0021/front_fr.23.200.jpg"
+  },
+  {
+   "code": "3162050009017",
+   "brand": "Ste Lucie",
+   "name": "Levure chimique",
+   "quantity": "50 g (5 x 10 g)",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/316/205/000/9017/front_fr.42.200.jpg"
+  }
+ ],
+ "levure-boulanger": [
+  {
+   "code": "3162050024027",
+   "brand": "Ste Lucie",
+   "name": "Levure boulangère traditionnelle",
+   "quantity": "5 x 8 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/316/205/002/4027/front_fr.3.200.jpg"
+  },
+  {
+   "code": "3176800001299",
+   "brand": "Nature et aliments",
+   "name": "Levure boulangère bio",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/317/680/000/1299/front_fr.22.200.jpg"
+  },
+  {
+   "code": "3278584330210",
+   "brand": "La pateliere",
+   "name": "Levure boulangère",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/327/858/433/0210/front_fr.12.200.jpg"
+  }
+ ],
+ "psyllium": [
+  {
+   "code": "3760087364200",
+   "brand": "ECOIDÉES - ETHNOSCIENCE",
+   "name": "Psyllium Blond",
+   "quantity": "150 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/008/736/4200/front_en.28.200.jpg"
+  },
+  {
+   "code": "17600873",
+   "brand": "ECOIDÉES",
+   "name": "Psyllium",
+   "quantity": "200 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/000/001/760/0873/front_fr.90.200.jpg"
+  },
+  {
+   "code": "3760048991025",
+   "brand": "Uberti",
+   "name": "Psyllium Blond Bio",
+   "quantity": "300 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/004/899/1025/front_fr.12.200.jpg"
+  }
+ ],
+ "xanthane": [],
+ "polenta": [
+  {
+   "code": "3252971460117",
+   "brand": "Alpina Savoie",
+   "name": "Polenta Express Grains Moyens",
+   "quantity": "500 g",
+   "stores": [
+    "Auchan",
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/297/146/0117/front_fr.99.200.jpg"
+  },
+  {
+   "code": "20632939",
+   "brand": "Belbake",
+   "name": "Polenta pronta",
+   "quantity": "1 kg",
+   "stores": [
+    "Lidl"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/000/002/063/2939/front_en.48.200.jpg"
+  },
+  {
+   "code": "3252971420319",
+   "brand": "Alpina",
+   "name": "Polenta Tradition Grains Moyens",
+   "quantity": "1 Kg",
+   "stores": [
+    "Auchan",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/297/142/0319/front_fr.56.200.jpg"
+  }
+ ],
+ "chapelure": [
+  {
+   "code": "3760130560863",
+   "brand": "Mon fournil",
+   "name": "Chapelure sans gluten",
+   "quantity": "",
+   "stores": [
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/013/056/0863/front_fr.11.200.jpg"
+  },
+  {
+   "code": "3259011202751",
+   "brand": "valpibio",
+   "name": "Chapelure bio",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/120/2751/front_fr.12.200.jpg"
+  }
+ ],
+ "pain": [
+  {
+   "code": "8008698011065",
+   "brand": "Schär",
+   "name": "MAESTRO VITAL - Pain aux graines tranché",
+   "quantity": "350g",
+   "stores": [
+    "Carrefour",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/800/869/801/1065/front_en.490.200.jpg"
+  },
+  {
+   "code": "3175681121263",
+   "brand": "Gerblé",
+   "name": "Pain campagnard sans gluten",
+   "quantity": "350 g",
+   "stores": [
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/317/568/112/1263/front_en.43.200.jpg"
+  },
+  {
+   "code": "06138024",
+   "brand": "Marque Repère",
+   "name": "pain façon campagne sans gluten",
+   "quantity": "400 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/000/000/613/8024/front_fr.24.200.jpg"
+  }
+ ],
+ "pain-de-mie": [
+  {
+   "code": "3175681185388",
+   "brand": "Gerblé",
+   "name": "Pain de mie cereales sans gluten",
+   "quantity": "400 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/317/568/118/5388/front_en.20.200.jpg"
+  },
+  {
+   "code": "3564706510005",
+   "brand": "Chaque Jour Sans Gluten",
+   "name": "Pain de mie sans gluten",
+   "quantity": "300 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/356/470/651/0005/front_fr.27.200.jpg"
+  },
+  {
+   "code": "3700566454206",
+   "brand": "Céliane",
+   "name": "Pain de mie 3 graines bio",
+   "quantity": "2x200 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/370/056/645/4206/front_fr.4.200.jpg"
+  }
+ ],
+ "pates": [
+  {
+   "code": "3256226107444",
+   "brand": "U",
+   "name": "Spaghetti sans gluten 400g",
+   "quantity": "400 g",
+   "stores": [
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/622/610/7444/front_fr.24.200.jpg"
+  },
+  {
+   "code": "3596710458240",
+   "brand": "Auchan",
+   "name": "Coquillettes sans gluten",
+   "quantity": "0.5 kg",
+   "stores": [
+    "Auchan"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/359/671/045/8240/front_fr.56.200.jpg"
+  },
+  {
+   "code": "3259011168767",
+   "brand": "Valpibio",
+   "name": "Coquillettes Maïs Riz Quinoa Bio - 500 G - Valpibio",
+   "quantity": "500g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/116/8767/front_fr.8.200.jpg"
+  }
+ ],
+ "pates-sarrasin": [
+  {
+   "code": "3380380057823",
+   "brand": "Ekibio",
+   "name": "Tortiglioni 100% Sarrasin",
+   "quantity": "500 g",
+   "stores": [
+    "L'Eau Vive"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/338/038/005/7823/front_fr.49.200.jpg"
+  },
+  {
+   "code": "3259011141722",
+   "brand": "Valpibio",
+   "name": "Fusilli au sarrasin",
+   "quantity": "500 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/114/1722/front_en.70.200.jpg"
+  },
+  {
+   "code": "3259011176335",
+   "brand": "Valpi Bio",
+   "name": "Linguine Sarrasin",
+   "quantity": "500 g",
+   "stores": [
+    "Biocoop",
+    "L'Eau Vive"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/117/6335/front_fr.35.200.jpg"
+  }
+ ],
+ "lasagnes": [
+  {
+   "code": "3259011176304",
+   "brand": "Valpi Bio",
+   "name": "Feuille de Lasagnes Maïs et Riz",
+   "quantity": "250 g e",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/117/6304/front_fr.40.200.jpg"
+  },
+  {
+   "code": "8076809576352",
+   "brand": "Barilla",
+   "name": "LASAGNE SANS GLUTEN 250g EU",
+   "quantity": "250 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/807/680/957/6352/front_fr.68.200.jpg"
+  },
+  {
+   "code": "3380380084492",
+   "brand": "Ma Vie sans Gluten",
+   "name": "Lasagnes aux lentilles jaunes",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/338/038/008/4492/front_fr.4.200.jpg"
+  }
+ ],
+ "pate-brisee": [
+  {
+   "code": "3531150000284",
+   "brand": "Biobleud",
+   "name": "Pâte brisée sans gluten Bio",
+   "quantity": "250 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/353/115/000/0284/front_fr.16.200.jpg"
+  },
+  {
+   "code": "06172446",
+   "brand": "marque super u",
+   "name": "Pate brisée sans gluten",
+   "quantity": "230 grammes",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/000/000/617/2446/front_fr.3.200.jpg"
+  },
+  {
+   "code": "3564700818947",
+   "brand": "Chaque Jour Sans Gluten",
+   "name": "Pâte Brisée Sans Gluten",
+   "quantity": "230 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/356/470/081/8947/front_fr.39.200.jpg"
+  }
+ ],
+ "pate-sablee": [],
+ "pate-feuilletee": [
+  {
+   "code": "06110729",
+   "brand": "BioBleud",
+   "name": "Pâte feuilletée sans gluten",
+   "quantity": "260g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/000/000/611/0729/front_fr.25.200.jpg"
+  },
+  {
+   "code": "3392590203662",
+   "brand": "Croustipate",
+   "name": "Pâte Feuilletée Sans Gluten",
+   "quantity": "280 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/339/259/020/3662/front_en.62.200.jpg"
+  },
+  {
+   "code": "3250392342494",
+   "brand": "Regain",
+   "name": "PATE A TARTE FEUILLETEE SANS GLUTEN 280g",
+   "quantity": "280 g",
+   "stores": [
+    "Intermarché"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/039/234/2494/front_fr.24.200.jpg"
+  }
+ ],
+ "tortillas": [
+  {
+   "code": "8410076473981",
+   "brand": "Old El Paso",
+   "name": "Tortillas sans gluten",
+   "quantity": "216 gram",
+   "stores": [
+    "Leclerc",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/841/007/647/3981/front_fr.57.200.jpg"
+  }
+ ],
+ "avoine": [
+  {
+   "code": "3421557701504",
+   "brand": "Grillon d'Or",
+   "name": "Flocons d'avoine SANS GLUTEN - 500g",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/342/155/770/1504/front_fr.41.200.jpg"
+  },
+  {
+   "code": "3421557501524",
+   "brand": "Terres Et Cereales",
+   "name": "Flocons d'avoine sans gluten",
+   "quantity": "500 g",
+   "stores": [
+    "Carrefour",
+    "Lidl"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/342/155/750/1524/front_fr.20.200.jpg"
+  },
+  {
+   "code": "3111900350953",
+   "brand": "Favrichon",
+   "name": "Flocons d’avoine, origine France, sans gluten",
+   "quantity": "500g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/311/190/035/0953/front_fr.3.200.jpg"
+  }
+ ],
+ "flocons-sarrasin": [
+  {
+   "code": "3421557701399",
+   "brand": "Grillon d'Or",
+   "name": "Flocons De Sarrasin",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/342/155/770/1399/front_fr.41.200.jpg"
+  },
+  {
+   "code": "3421557501616",
+   "brand": "Terres Et Cereales",
+   "name": "Flocons de sarrasin",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/342/155/750/1616/front_fr.18.200.jpg"
+  },
+  {
+   "code": "3329483901206",
+   "brand": "Markal",
+   "name": "Flocons de sarrasin",
+   "quantity": "500 g",
+   "stores": [
+    "Naturalia"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/390/1206/front_fr.28.200.jpg"
+  }
+ ],
+ "flocons-riz": [],
+ "sarrasin": [
+  {
+   "code": "3329482511208",
+   "brand": "Markal",
+   "name": "Sarrasin Décortiqué",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/251/1208/front_fr.46.200.jpg"
+  }
+ ],
+ "millet": [
+  {
+   "code": "3329482411201",
+   "brand": "Markal",
+   "name": "Millet Décortiqué",
+   "quantity": "500 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/332/948/241/1201/front_fr.19.200.jpg"
+  },
+  {
+   "code": "3760215380034",
+   "brand": "Graines d'Alisa",
+   "name": "Millet décortiqué",
+   "quantity": "500g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/021/538/0034/front_fr.31.200.jpg"
+  },
+  {
+   "code": "3273120010540",
+   "brand": "Celnat",
+   "name": "Millet",
+   "quantity": "1 kg",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/327/312/001/0540/front_fr.7.200.jpg"
+  }
+ ],
+ "granola": [
+  {
+   "code": "5060092030847",
+   "brand": "Lizis",
+   "name": "Gluten Free Granola",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/506/009/203/0847/front_en.17.200.jpg"
+  }
+ ],
+ "riz-souffle": [
+  {
+   "code": "3229820794624",
+   "brand": "Bjorg",
+   "name": "Galettes riz complet Bio",
+   "quantity": "130g",
+   "stores": [
+    "Carrefour",
+    "Franprix",
+    "Magasins U",
+    "Monoprix"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/322/982/079/4624/front_fr.133.200.jpg"
+  },
+  {
+   "code": "3564707001236",
+   "brand": "Bio Village",
+   "name": "Galettes riz complet",
+   "quantity": "130 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/356/470/700/1236/front_en.121.200.jpg"
+  },
+  {
+   "code": "3261430007428",
+   "brand": "Bongran",
+   "name": "Galettes de riz de Camargue complet",
+   "quantity": "130 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/326/143/000/7428/front_en.65.200.jpg"
+  }
+ ],
+ "nouilles-riz": [
+  {
+   "code": "9556041130677",
+   "brand": "Ayam",
+   "name": "Nouilles de riz",
+   "quantity": "200 g",
+   "stores": [
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/955/604/113/0677/front_fr.23.200.jpg"
+  },
+  {
+   "code": "8713576282504",
+   "brand": "Terrasana",
+   "name": "Nouilles de riz complet",
+   "quantity": "250 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/871/357/628/2504/front_fr.5.200.jpg"
+  },
+  {
+   "code": "8713576282511",
+   "brand": "Terra Sana",
+   "name": "NOUILLES DE RIZ THAILANDAIS SG",
+   "quantity": "85g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/871/357/628/2511/front_en.37.200.jpg"
+  }
+ ],
+ "chips-mais": [
+  {
+   "code": "8410076481757",
+   "brand": "Old El Paso",
+   "name": "Tortilla chips",
+   "quantity": "185g",
+   "stores": [
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/841/007/648/1757/front_en.143.200.jpg"
+  },
+  {
+   "code": "3760020508036",
+   "brand": "Jardin Bio étic",
+   "name": "Tortillas nature",
+   "quantity": "125 g",
+   "stores": [
+    "Carrefour",
+    "Casino"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/002/050/8036/front_fr.33.200.jpg"
+  },
+  {
+   "code": "5391528040216",
+   "brand": "Blanco Niño",
+   "name": "Blanco Niño Sea Salt Tortilla Chips",
+   "quantity": "170g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/539/152/804/0216/front_en.29.200.jpg"
+  }
+ ],
+ "tamari": [
+  {
+   "code": "8715035150300",
+   "brand": "Kikkoman",
+   "name": "Tamari Sauce soja",
+   "quantity": "250ml",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/871/503/515/0300/front_en.171.200.jpg"
+  },
+  {
+   "code": "5411788044431",
+   "brand": "Lima",
+   "name": "Tamari less salt -25%",
+   "quantity": "500 ml",
+   "stores": [
+    "Bio c' Bon",
+    "Biocoop",
+    "Naturalia"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/541/178/804/4431/front_en.80.200.jpg"
+  },
+  {
+   "code": "3760275570789",
+   "brand": "Autour du Riz",
+   "name": "Véritable tamari - sauce de soja",
+   "quantity": "600ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/027/557/0789/front_fr.59.200.jpg"
+  }
+ ],
+ "miso": [
+  {
+   "code": "3431590000441",
+   "brand": "Danival",
+   "name": "Miso",
+   "quantity": "200 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/343/159/000/0441/front_fr.63.200.jpg"
+  },
+  {
+   "code": "5060194791820",
+   "brand": "Saitaku",
+   "name": "Simply Japanese Shiro Miso Paste",
+   "quantity": "300g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/506/019/479/1820/front_en.38.200.jpg"
+  },
+  {
+   "code": "3760275574442",
+   "brand": "Autour du Riz",
+   "name": "Miso Riz & Soja",
+   "quantity": "200 g",
+   "stores": [
+    "Naturalia"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/027/557/4442/front_fr.10.200.jpg"
+  }
+ ],
+ "nuoc-mam": [
+  {
+   "code": "9556041608428",
+   "brand": "Ayam",
+   "name": "Sauc Nuoc Mam",
+   "quantity": "200 ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/955/604/160/8428/front_fr.33.200.jpg"
+  }
+ ],
+ "gochujang": [
+  {
+   "code": "0852320000013",
+   "brand": "Chung Jung One",
+   "name": "Gochujang",
+   "quantity": "7.5 oz, 215 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/085/232/000/0013/front_en.12.200.jpg"
+  }
+ ],
+ "pate-curry": [
+  {
+   "code": "9556041780629",
+   "brand": "Ayam",
+   "name": "Pâte de curry rouge",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/955/604/178/0629/front_fr.29.200.jpg"
+  },
+  {
+   "code": "8857122559396",
+   "brand": "Siam",
+   "name": "Red Curry Paste 100g",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/885/712/255/9396/front_fr.4.200.jpg"
+  },
+  {
+   "code": "8857122559570",
+   "brand": "Desiam",
+   "name": "Pâte De Curry Verte",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/885/712/255/9570/front_fr.18.200.jpg"
+  }
+ ],
+ "moutarde": [
+  {
+   "code": "3564707124973",
+   "brand": "Bio Village",
+   "name": "Moutarde bio à l'ancienne",
+   "quantity": "200 g",
+   "stores": [
+    "Leclerc"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/356/470/712/4973/front_fr.34.200.jpg"
+  },
+  {
+   "code": "3230140002412",
+   "brand": "Edmond Fallot",
+   "name": "Moutarde de Dijon fabriquée à la meule de pierre",
+   "quantity": "210 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/323/014/000/2412/front_fr.21.200.jpg"
+  },
+  {
+   "code": "3417960022824",
+   "brand": "Arcadie",
+   "name": "MOUTARDE jaune",
+   "quantity": "60 (100 ml)",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/341/796/002/2824/front_fr.33.200.jpg"
+  }
+ ],
+ "ketchup": [
+  {
+   "code": "87157215",
+   "brand": "Heinz",
+   "name": "Tomato Ketchup",
+   "quantity": "250g",
+   "stores": [
+    "Carrefour",
+    "Leclerc",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/000/008/715/7215/front_en.208.200.jpg"
+  },
+  {
+   "code": "8712100751370",
+   "brand": "Amora",
+   "name": "Amora Ketchup Flacon Souple Tête en bas 550g",
+   "quantity": "550 g",
+   "stores": [
+    "Carrefour",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/871/210/075/1370/front_en.149.200.jpg"
+  },
+  {
+   "code": "4056489470847",
+   "brand": "LIDL",
+   "name": "Tomato Ketchup",
+   "quantity": "500 ml, 560 g",
+   "stores": [
+    "Lidl"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/405/648/947/0847/front_es.86.200.jpg"
+  }
+ ],
+ "harissa": [
+  {
+   "code": "6194049100105",
+   "brand": "Le phare du Cap-Bon",
+   "name": "Harissa du Cap-Bon",
+   "quantity": "140g",
+   "stores": [
+    "Auchan",
+    "Carrefour",
+    "Netto"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/619/404/910/0105/front_en.129.200.jpg"
+  },
+  {
+   "code": "3184340000498",
+   "brand": "Pural",
+   "name": "Harissa Demeter",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/318/434/000/0498/front_fr.22.200.jpg"
+  },
+  {
+   "code": "8009320039839",
+   "brand": "Biffi",
+   "name": "Harissa",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/932/003/9839/front_fr.3.200.jpg"
+  }
+ ],
+ "pesto": [
+  {
+   "code": "8076809513753",
+   "brand": "Barilla",
+   "name": "Sauce pesto avec basilic",
+   "quantity": "190 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/807/680/951/3753/front_en.347.200.jpg"
+  },
+  {
+   "code": "8001060375109",
+   "brand": "SACLA'",
+   "name": "Sauce pesto alla genovese",
+   "quantity": "190 gr",
+   "stores": [
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/800/106/037/5109/front_en.71.200.jpg"
+  },
+  {
+   "code": "8008343279963",
+   "brand": "Rummo SpA",
+   "name": "Pesto a La Genovese",
+   "quantity": "190 gram",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/834/327/9963/front_fr.47.200.jpg"
+  }
+ ],
+ "caramel": [
+  {
+   "code": "3700774301408",
+   "brand": "L'Artisan Tartineur",
+   "name": "Caramel au beurre sale au sel de guerande",
+   "quantity": "250 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/370/077/430/1408/front_fr.15.200.jpg"
+  },
+  {
+   "code": "3383670001483",
+   "brand": "Raffolé",
+   "name": "Caramel au beurre salé",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/338/367/000/1483/front_fr.28.200.jpg"
+  },
+  {
+   "code": "3760088757094",
+   "brand": "Terres Bleues",
+   "name": "caramel au beurre salé",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/008/875/7094/front_fr.9.200.jpg"
+  }
+ ],
+ "bouillon-legumes": [
+  {
+   "code": "3760020505936",
+   "brand": "Jardin Bio étic",
+   "name": "Bouillon cube Légumes sans sel sans gluten",
+   "quantity": "72 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/002/050/5936/front_fr.133.200.jpg"
+  },
+  {
+   "code": "3609060002701",
+   "brand": "Ibo!",
+   "name": "Bouillon de légumes en cubes",
+   "quantity": "66 g e",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/360/906/000/2701/front_fr.54.200.jpg"
+  },
+  {
+   "code": "3520832230064",
+   "brand": "Philia",
+   "name": "Bouillon de légumes",
+   "quantity": "66 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/352/083/223/0064/front_fr.28.200.jpg"
+  }
+ ],
+ "bouillon-volaille": [
+  {
+   "code": "3609060004606",
+   "brand": "cuisine ibo",
+   "name": "Bouillon de poule",
+   "quantity": "66g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/360/906/000/4606/front_fr.3.200.jpg"
+  },
+  {
+   "code": "3520832230088",
+   "brand": "Philia",
+   "name": "Bouillon de poule",
+   "quantity": "66 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/352/083/223/0088/front_fr.27.200.jpg"
+  },
+  {
+   "code": "3259011207282",
+   "brand": "Valpi Bio",
+   "name": "Bouillon de poule",
+   "quantity": "60 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/901/120/7282/front_fr.4.200.jpg"
+  }
+ ],
+ "bouillon-boeuf": [
+  {
+   "code": "20815653",
+   "brand": "Kania",
+   "name": "Bouillon de boeuf bio",
+   "quantity": "140g",
+   "stores": [
+    "Lidl"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/000/002/081/5653/front_de.111.200.jpg"
+  },
+  {
+   "code": "3760149922010",
+   "brand": "Les secrets de Manou",
+   "name": "Bouillon en cube de boeuf",
+   "quantity": "66g",
+   "stores": [
+    "Bio c' Bon"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/014/992/2010/front_fr.22.200.jpg"
+  },
+  {
+   "code": "3760020508142",
+   "brand": "Jardin Bio étic",
+   "name": "Bouillon Cube Boeuf Pauvre En Sel Sans Gluten",
+   "quantity": "80 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/002/050/8142/front_fr.27.200.jpg"
+  }
+ ],
+ "curry": [
+  {
+   "code": "50197361",
+   "brand": "Sharwood's",
+   "name": "Poudre De Curry Douce",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/000/005/019/7361/front_fr.4.200.jpg"
+  }
+ ],
+ "garam-masala": [],
+ "ras-el-hanout": [
+  {
+   "code": "3417960023036",
+   "brand": "Arcadie",
+   "name": "RAS EL HANOUT",
+   "quantity": "35 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/341/796/002/3036/front_fr.30.200.jpg"
+  }
+ ],
+ "paprika": [
+  {
+   "code": "3417960022893",
+   "brand": "Arcadie",
+   "name": "PAPRIKA DOUX de Hongrie",
+   "quantity": "40 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/341/796/002/2893/front_fr.34.200.jpg"
+  },
+  {
+   "code": "8421401401203",
+   "brand": "La Chinata",
+   "name": "Paprika Bitrswt SMKD Spain",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/842/140/140/1203/front_fr.3.200.jpg"
+  }
+ ],
+ "cumin": [
+  {
+   "code": "3417960033561",
+   "brand": "Arcadie",
+   "name": "CUMIN moulu PETIT PET \"COOK\" 80g*",
+   "quantity": "80 (230 ml)",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/341/796/003/3561/front_fr.57.200.jpg"
+  }
+ ],
+ "jambon": [
+  {
+   "code": "3302740050268",
+   "brand": "Fleury Michon",
+   "name": "Jambon Simplement Bio - Conservation sans nitrite",
+   "quantity": "120 g",
+   "stores": [
+    "Leclerc",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/330/274/005/0268/front_fr.42.200.jpg"
+  },
+  {
+   "code": "3250390277286",
+   "brand": "Monique Ranou",
+   "name": "Jambon sup dd csn label rouge 4t 160g",
+   "quantity": "160 g",
+   "stores": [
+    "Intermarché"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/325/039/027/7286/front_fr.47.200.jpg"
+  },
+  {
+   "code": "7613035999503",
+   "brand": "Herta",
+   "name": "HERTA Dés de Jambon - 2x75g",
+   "quantity": "150 g",
+   "stores": [
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/761/303/599/9503/front_fr.71.200.jpg"
+  }
+ ],
+ "lardons": [
+  {
+   "code": "3700133906022",
+   "brand": "Brocéliande",
+   "name": "Lardons Bien Élevé fumés",
+   "quantity": "2 x 75 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/370/013/390/6022/front_fr.51.200.jpg"
+  },
+  {
+   "code": "3459860005453",
+   "brand": "Isla Mondial",
+   "name": "Lardon de dinde",
+   "quantity": "2 x 100 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/345/986/000/5453/front_fr.14.200.jpg"
+  },
+  {
+   "code": "7613035336506",
+   "brand": "Herta",
+   "name": "Lardons",
+   "quantity": "204 g (2 * 102 g)",
+   "stores": [
+    "Franprix"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/761/303/533/6506/front_fr.3.200.jpg"
+  }
+ ],
+ "pancetta": [
+  {
+   "code": "8005153004914",
+   "brand": "Montorsi",
+   "name": "Pancetta",
+   "quantity": "100 g",
+   "stores": [
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/800/515/300/4914/front_fr.21.200.jpg"
+  },
+  {
+   "code": "8003170002333",
+   "brand": "Conad",
+   "name": "Pancetta affumicata a cubetti",
+   "quantity": "200 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/317/000/2333/front_fr.3.200.jpg"
+  },
+  {
+   "code": "8007660872123",
+   "brand": "Fratelli Beretta",
+   "name": "Pancetta affumicata a cubetti",
+   "quantity": "2 x 90 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/766/087/2123/front_it.12.200.jpg"
+  }
+ ],
+ "chorizo": [
+  {
+   "code": "3181450100599",
+   "brand": "Cesar Moroni",
+   "name": "CHORIZO Doux",
+   "quantity": "0.2 kg",
+   "stores": [
+    "Leclerc",
+    "Magasins U",
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/318/145/010/0599/front_fr.55.200.jpg"
+  },
+  {
+   "code": "8422229110100",
+   "brand": "HIJO DE JOSE MARTINEZ SOMALO S.L.",
+   "name": "Chorizo riojano",
+   "quantity": "280 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/842/222/911/0100/front_en.31.200.jpg"
+  },
+  {
+   "code": "8437003720017",
+   "brand": "Luis Gil",
+   "name": "Chorizo Extra Doux Biologique",
+   "quantity": "275 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/843/700/372/0017/front_fr.34.200.jpg"
+  }
+ ],
+ "saucisses": [
+  {
+   "code": "3537580800487",
+   "brand": "Hénaff",
+   "name": "La Saucisse Nature",
+   "quantity": "277 g (x 5)",
+   "stores": [
+    "Carrefour",
+    "Leclerc",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/353/758/080/0487/front_fr.40.200.jpg"
+  },
+  {
+   "code": "3340584108943",
+   "brand": "Saveurs des mauges",
+   "name": "Saucisses fumees Saveurs des Mauges, 3 pieces",
+   "quantity": "",
+   "stores": [],
+   "image": ""
+  },
+  {
+   "code": "3482970009578",
+   "brand": "Bixente Ibarra",
+   "name": "Saucisses confites",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/348/297/000/9578/front_fr.16.200.jpg"
+  }
+ ],
+ "merguez": [
+  {
+   "code": "3340584108523",
+   "brand": "Saveur des Mauges",
+   "name": "Merguez boeuf-mouton",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/334/058/410/8523/front_fr.4.200.jpg"
+  },
+  {
+   "code": "0277431024145",
+   "brand": "Maison des Viandes du Bazadais",
+   "name": "Merguez pur bœuf",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/027/743/102/4145/front_fr.3.200.jpg"
+  }
+ ],
+ "steak-hache": [
+  {
+   "code": "3463490012910",
+   "brand": "Convivial",
+   "name": "Steack Haché façon Bouchère pur Bœuf bio",
+   "quantity": "400 g (4 x 100 g)",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/346/349/001/2910/front_fr.10.200.jpg"
+  }
+ ],
+ "chocolat-noir": [
+  {
+   "code": "7610036002737",
+   "brand": "Villars",
+   "name": "Chocolat Noir 72%, Collection Pure",
+   "quantity": "100g",
+   "stores": [
+    "Carrefour",
+    "Intermarché",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/761/003/600/2737/front_es.71.200.jpg"
+  },
+  {
+   "code": "3258590000116",
+   "brand": "Dardenne",
+   "name": "Chocolat noir 70% cacao",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/859/000/0116/front_fr.29.200.jpg"
+  },
+  {
+   "code": "8410342006004",
+   "brand": "Torras",
+   "name": "Chocolat Noir-pépites De Cacao Sans Sucre Ajouté Et Sans Gluten",
+   "quantity": "75 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/841/034/200/6004/front_ro.11.200.jpg"
+  }
+ ],
+ "chocolat-lait": [
+  {
+   "code": "3258590000109",
+   "brand": "Dardenne",
+   "name": "Chocolat lait",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/859/000/0109/front_fr.49.200.jpg"
+  },
+  {
+   "code": "8410342005632",
+   "brand": "Torras",
+   "name": "Chocolat Au Lait almendras Sans Gluten (75G)",
+   "quantity": "75 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/841/034/200/5632/front_fr.19.200.jpg"
+  }
+ ],
+ "chocolat-blanc": [
+  {
+   "code": "7610036010107",
+   "brand": "Villars",
+   "name": "Chocolat Villars Blanc 100g",
+   "quantity": "100 g",
+   "stores": [
+    "Magasins U",
+    "Monoprix"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/761/003/601/0107/front_fr.51.200.jpg"
+  },
+  {
+   "code": "3258590001366",
+   "brand": "Dardenne",
+   "name": "Chocolat blanc à l’agave",
+   "quantity": "100 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/325/859/000/1366/front_fr.4.200.jpg"
+  },
+  {
+   "code": "5412038295603",
+   "brand": "Galler",
+   "name": "Chocolat blanc manon",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/541/203/829/5603/front_fr.4.200.jpg"
+  }
+ ],
+ "pepites": [],
+ "sucre-perle": [],
+ "vanille": [],
+ "biscuits-cuillere": [],
+ "crackers": [
+  {
+   "code": "8008698003503",
+   "brand": "Schär",
+   "name": "Crackers",
+   "quantity": "210g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/869/800/3503/front_en.244.200.jpg"
+  },
+  {
+   "code": "8008910231271",
+   "brand": "Quality Food Group SpA",
+   "name": "Crackers sans gluten romarin",
+   "quantity": "200 g",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/800/891/023/1271/front_en.38.200.jpg"
+  },
+  {
+   "code": "3380380077968",
+   "brand": "Ma vie sans gluten",
+   "name": "Crackers de riz au Romarin",
+   "quantity": "40 g",
+   "stores": [
+    "Biocoop"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/338/038/007/7968/front_fr.22.200.jpg"
+  }
+ ],
+ "guimauves": [
+  {
+   "code": "3103220046159",
+   "brand": "Haribo",
+   "name": "Chamallows L'original",
+   "quantity": "300 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/310/322/004/6159/front_fr.108.200.jpg"
+  },
+  {
+   "code": "0054300091510",
+   "brand": "Rocky Mountain",
+   "name": "Mini Rocky Mountain Marshmallow",
+   "quantity": "150 g e",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/005/430/009/1510/front_fr.66.200.jpg"
+  },
+  {
+   "code": "3352751000073",
+   "brand": "Auzier Chanernac",
+   "name": "Guimauves",
+   "quantity": "",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/335/275/100/0073/front_en.18.200.jpg"
+  }
+ ],
+ "glace-vanille": [
+  {
+   "code": "3267180090314",
+   "brand": "HDG",
+   "name": "Glace vanille bourbon",
+   "quantity": "487.5 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/326/718/009/0314/front_fr.23.200.jpg"
+  },
+  {
+   "code": "3760015740007",
+   "brand": "La Belle Aude",
+   "name": "Crème glacée à la vanille Bourbon de Madagascar",
+   "quantity": "550 ml / 356 g",
+   "stores": [
+    "Carrefour"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/376/001/574/0007/front_fr.25.200.jpg"
+  },
+  {
+   "code": "8711327300064",
+   "brand": "Grom",
+   "name": "Grom Crème Glacée Pot Vanille",
+   "quantity": "460 ml (325 g)",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/871/132/730/0064/front_fr.23.200.jpg"
+  }
+ ],
+ "feuilles-riz": [],
+ "mayonnaise": [
+  {
+   "code": "5000157076397",
+   "brand": "Heinz",
+   "name": "Heinz Mayonnaise",
+   "quantity": "400 ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/500/015/707/6397/front_en.48.200.jpg"
+  },
+  {
+   "code": "8410127050819",
+   "brand": "Hellmann's",
+   "name": "Great Mayonnaise",
+   "quantity": "450 ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/841/012/705/0819/front_en.41.200.jpg"
+  },
+  {
+   "code": "8719189240177",
+   "brand": "Kewpie",
+   "name": "Kewpie Mayonnaise",
+   "quantity": "355 ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/871/918/924/0177/front_en.58.200.jpg"
+  }
+ ],
+ "biscuits": [
+  {
+   "code": "3700211234078",
+   "brand": "Gerblé",
+   "name": "Sablé Nature Sans Gluten & Lactose",
+   "quantity": "120 g",
+   "stores": [
+    "Auchan",
+    "Carrefour",
+    "Magasins U"
+   ],
+   "image": "https://images.openfoodfacts.org/images/products/370/021/123/4078/front_en.32.200.jpg"
+  }
+ ],
+ "mirin": [
+  {
+   "code": "5014276512018",
+   "brand": "Yutaka",
+   "name": "Mirin Sweet Rice Seasoning",
+   "quantity": "150ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/501/427/651/2018/front_en.53.200.jpg"
+  },
+  {
+   "code": "3760275575296",
+   "brand": "Autour du Riz",
+   "name": "Mirin Saké doux pour cuisiner",
+   "quantity": "200 ml",
+   "stores": [],
+   "image": "https://images.openfoodfacts.org/images/products/376/027/557/5296/front_fr.13.200.jpg"
+  }
+ ]
+}

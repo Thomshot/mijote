@@ -4,6 +4,7 @@ import { useApp } from "../state";
 import { AISLES, type Aisle } from "../types";
 import { uid } from "../storage";
 import { Empty } from "../components/ui";
+import { ProductHint } from "../components/ProductHint";
 
 const AISLE_EMOJI: Record<Aisle, string> = {
   "Fruits & légumes": "🥬",
@@ -90,6 +91,7 @@ export function Shopping() {
                         {i.glutenNote && !i.checked && <small className="gf-note">⚠️ {i.glutenNote}</small>}
                       </span>
                       <span className="aisle__qty">{i.quantity}</span>
+                      {!i.checked && <ProductHint name={i.name} />}
                     </li>
                   ))}
                 </ul>

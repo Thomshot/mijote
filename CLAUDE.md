@@ -26,9 +26,10 @@ npm run build                    # vérifie les types puis construit dans dist/
 npx vite preview --port 4173     # sert le build de production
 npx tsx scripts/check-db.ts      # contrôle la base : ingrédients à risque gluten, doublons, filtres
 npx tsx scripts/check-photos.ts  # vérifie que chaque recette a sa photo
+npx tsx scripts/fetch-products.ts [clé…]  # produits repères Open Food Facts (lent : ~10 requêtes/min)
 ```
 
-Toujours lancer `npm run build` et `scripts/check-db.ts` avant de committer.
+Toujours lancer `npm run build` et `scripts/check-db.ts` avant de committer. Le site se sert depuis la racine en local (`http://localhost:4173/`, pas `/mijote/`).
 
 ## Architecture
 
@@ -40,6 +41,7 @@ Toujours lancer `npm run build` et `scripts/check-db.ts` avant de committer.
 | `src/data/db/*.ts` | **196 recettes** au format compact `R(...)` (voir `helpers.ts`). Ingrédient = `"nom\|quantité\|unité\|rayon\|note"`. Rayons : L, V, F, E, G, S, A. Notes : codes de `NOTES` (`bouillon`, `tamari`, `farine`…) ou texte libre |
 | `src/data/photos.json` + `public/img/*.webp` | Une photo par recette (Wikimedia Commons, licences libres, crédit affiché sur la fiche) |
 | `scripts/fetch-images.mjs` | Récupère les photos. Requêtes dans `scripts/image-queries.json`, corrections dans `scripts/image-picks.json` (`"requête"` ou `"requête#morceau du titre"`) |
+| `src/data/productCatalog.ts` + `src/data/products.json` | « Où le trouver ? » sous chaque ingrédient sensible (fiche + courses, `components/ProductHint.tsx`) : conseil de rayon + 0 à 3 produits repères Open Food Facts au label sans gluten. Filtres par clé : `must`, `not`, `start`, `strict` (produits normalement au blé : « sans gluten » dans le nom ou marque 100 % sans gluten). Exclusions à la main dans `scripts/product-picks.json`. `check-db.ts` signale tout ingrédient sensible absent du catalogue. **Relire les produits à l'œil après chaque relance** (la base OFF contient des erreurs, ex. pâtes au blé étiquetées sans gluten) |
 | `src/data/season.ts` | Calendrier des fruits et légumes de saison (bandeau d'accueil, envie « De saison ») |
 | `src/data/swaps.ts` | Guide des substitutions sans gluten |
 | `src/scanner/` | Scanner de code-barres : `CameraScanner.tsx` (ZXing, chargé à la demande) et `gluten.ts` (Open Food Facts → verdict safe / probable / traces / danger / unknown) |

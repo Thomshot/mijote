@@ -11,6 +11,15 @@ export function Guide() {
           ))}
         </ul>
       </div>
+      <div className="callout">
+        <h3>🛒 Où acheter sans gluten</h3>
+        <ul>
+          <li>Le <strong>rayon sans gluten</strong> des grandes surfaces : farines, pâtes, pains, biscuits, pâtes à tarte.</li>
+          <li>Les <strong>magasins bio</strong> (Biocoop, Naturalia, La Vie Claire…) : farines variées, psyllium, millet, sarrasin.</li>
+          <li>Les <strong>épiceries asiatiques</strong> pour le tamari, les nouilles et les feuilles de riz, en lisant chaque étiquette.</li>
+          <li>Dans chaque fiche recette, touche « Où le trouver ? » sous un ingrédient sensible pour voir des produits repères.</li>
+        </ul>
+      </div>
       <h3>Par quoi remplacer…</h3>
       <div className="swaps">
         {SWAPS.map((s) => (
