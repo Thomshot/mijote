@@ -37,7 +37,7 @@ Toujours lancer `npm run build` et `scripts/check-db.ts` avant de committer.
 | `src/App.tsx` | Coque : onglets Découvrir · Recettes · **Scanner** (bouton central) · Courses · Carnet. Les vues « menu » et « profil » s'ouvrent depuis l'accueil, avec un bouton retour |
 | `src/state.tsx` | État global (`useApp()`) : profil, favoris, votes 👍👎, courses, menu, notes, recettes cuisinées, produits sûrs, toast, easter egg |
 | `src/engine.ts` | Moteur de suggestions **local** : filtres régimes (calculés depuis les ingrédients), dégoûts et goûts avec groupes de synonymes (`matchesTerm`), score (budget, temps, niveau, saison, frigo), menu de la semaine (`buildLocalPlan`), recherche |
-| `src/data/db/*.ts` | **174 recettes** au format compact `R(...)` (voir `helpers.ts`). Ingrédient = `"nom\|quantité\|unité\|rayon\|note"`. Rayons : L, V, F, E, G, S, A. Notes : codes de `NOTES` (`bouillon`, `tamari`, `farine`…) ou texte libre |
+| `src/data/db/*.ts` | **196 recettes** au format compact `R(...)` (voir `helpers.ts`). Ingrédient = `"nom\|quantité\|unité\|rayon\|note"`. Rayons : L, V, F, E, G, S, A. Notes : codes de `NOTES` (`bouillon`, `tamari`, `farine`…) ou texte libre |
 | `src/data/photos.json` + `public/img/*.webp` | Une photo par recette (Wikimedia Commons, licences libres, crédit affiché sur la fiche) |
 | `scripts/fetch-images.mjs` | Récupère les photos. Requêtes dans `scripts/image-queries.json`, corrections dans `scripts/image-picks.json` (`"requête"` ou `"requête#morceau du titre"`) |
 | `src/data/season.ts` | Calendrier des fruits et légumes de saison (bandeau d'accueil, envie « De saison ») |
@@ -59,6 +59,6 @@ Il n'y a pas de tests unitaires. On vérifie avec des parcours Puppeteer (`puppe
 
 ## Historique des grandes étapes
 
-1. PWA avec IA (Claude), puis passage en **100 % gratuit** avec la base locale de 174 recettes et le moteur de suggestions.
+1. PWA avec IA (Claude), puis passage en **100 % gratuit** avec la base locale de 196 recettes et le moteur de suggestions.
 2. Photos des recettes, scanner de code-barres, fermeture des fiches par glissement, synonymes goûts / dégoûts, easter egg.
 3. Carte restaurant, saisonnalité, produits sûrs, notes et compteur « cuisinées », sauvegarde / restauration, IA chargée à la demande.

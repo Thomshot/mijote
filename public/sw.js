@@ -1,6 +1,6 @@
 // Service worker minimal : l'appli reste utilisable hors connexion
 // (favoris, liste de courses, recettes déjà générées).
-const CACHE = "mijote-v4";
+const CACHE = "mijote-v5";
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(["./", "./index.html"])));

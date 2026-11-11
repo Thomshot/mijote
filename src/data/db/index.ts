@@ -6,5 +6,6 @@ import { PLATS_2 } from "./plats2";
 import { DESSERTS } from "./desserts";
 import { SNACKS } from "./snacks";
 import { BASES } from "./bases";
+import { REVISITES } from "./revisites";
 
-export const RECIPES: Recipe[] = [...PETIT_DEJ, ...ENTREES, ...PLATS_1, ...PLATS_2, ...DESSERTS, ...SNACKS, ...BASES];
+export const RECIPES: Recipe[] = [...PETIT_DEJ, ...ENTREES, ...PLATS_1, ...PLATS_2, ...DESSERTS, ...SNACKS, ...BASES, ...REVISITES];

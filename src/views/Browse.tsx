@@ -14,15 +14,16 @@ export function Browse() {
   const [quick, setQuick] = useState(false);
   const [cheap, setCheap] = useState(false);
   const [veggie, setVeggie] = useState(false);
+  const [revisited, setRevisited] = useState(false);
   const [onlyMine, setOnlyMine] = useState(true);
   const [limit, setLimit] = useState(PAGE);
 
   const results = useMemo(() => {
-    const found = searchRecipes(q, { mealType: meal, quick, cheap, veggie });
+    const found = searchRecipes(q, { mealType: meal, quick, cheap, veggie, revisited });
     if (!onlyMine) return found;
     const ok = new Set(allowedFor(app.profile, found).map((r) => r.id));
     return found.filter((r) => ok.has(r.id));
-  }, [q, meal, quick, cheap, veggie, onlyMine, app.profile]);
+  }, [q, meal, quick, cheap, veggie, revisited, onlyMine, app.profile]);
 
   const reset = () => setLimit(PAGE);
 
@@ -59,6 +60,9 @@ export function Browse() {
         ))}
       </div>
       <div className="chips chips--small">
+        <Chip active={revisited} onClick={() => (setRevisited(!revisited), reset())}>
+          🔄 Classiques revisités
+        </Chip>
         <Chip active={quick} onClick={() => setQuick(!quick)}>
           ⏱️ ≤ 30 min
         </Chip>

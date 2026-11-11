@@ -43,6 +43,13 @@ const NOTES: Record<string, string> = {
   lardons: "Lardons : vérifier la mention sans gluten.",
   biere: "Bière certifiée sans gluten uniquement.",
   galette: "Galettes/crackers certifiés sans gluten.",
+  psyllium: "Psyllium blond : naturellement sans gluten, il remplace l'élasticité du gluten. Prendre un sachet certifié.",
+  boulange: "Levure de boulanger sèche : vérifier la mention sans gluten (certaines contiennent des additifs).",
+  feuilletee: "Pâte feuilletée certifiée sans gluten (rayon sans gluten) : la classique est au blé.",
+  steak: "Steak haché 100 % pur bœuf : les « préparations de viande hachée » peuvent contenir de la chapelure ou des fibres de blé.",
+  saucisse: "Saucisses et merguez : vérifier la mention sans gluten, certaines contiennent de la chapelure.",
+  riz: "Galettes de riz : vérifier qu'elles sont 100 % riz (certaines marques ajoutent du blé).",
+  friture: "Huile de friture propre et dédiée : jamais celle où ont cuit des produits panés au blé.",
 };
 
 function ing(spec: string): Ingredient {

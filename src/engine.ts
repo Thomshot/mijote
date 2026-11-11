@@ -159,12 +159,13 @@ export interface Criteria {
 /** Envies prédéfinies → règles de correspondance. */
 export const CRAVING_RULES: Record<string, (r: Recipe) => boolean> = {
   "De saison": isInSeason,
+  "Classiques revisités": (r) => r.tags.includes("revisité"),
   Réconfortant: (r) => r.tags.includes("réconfortant") || r.tags.includes("hiver"),
   Rapide: (r) => totalMinutes(r) <= 25,
   Healthy: (r) => r.tags.includes("healthy"),
   "Petit budget": (r) => r.costPerServing <= 1.8,
   "Cuisine du monde": (r) =>
-    r.tags.some((t) => ["indien", "thaï", "asiatique", "mexicain", "marocain", "libanais", "japonais", "coréen", "vietnamien", "grec", "espagnol", "américain"].includes(t)),
+    r.tags.some((t) => ["indien", "thaï", "asiatique", "mexicain", "marocain", "libanais", "japonais", "coréen", "vietnamien", "grec", "espagnol", "américain", "anglais", "turc"].includes(t)),
   Végétarien: (r) => !flagsOf(r).meat && !flagsOf(r).fish,
   "Pour recevoir": (r) => r.tags.includes("recevoir"),
   "Street food": (r) => r.tags.includes("street food") || r.tags.includes("apéro"),
@@ -231,7 +232,7 @@ export function suggest(profile: Profile, c: Criteria, count = 6): Recipe[] {
 }
 
 /** Recherche dans toute la base, avec filtres. */
-export function searchRecipes(q: string, opts: { mealType?: MealType; quick?: boolean; cheap?: boolean; veggie?: boolean }) {
+export function searchRecipes(q: string, opts: { mealType?: MealType; quick?: boolean; cheap?: boolean; veggie?: boolean; revisited?: boolean }) {
   const words = norm(q)
     .split(/\s+/)
     .filter((w) => w.length > 1);
@@ -240,6 +241,7 @@ export function searchRecipes(q: string, opts: { mealType?: MealType; quick?: bo
     if (opts.quick && totalMinutes(r) > 30) return false;
     if (opts.cheap && r.costPerServing > 2) return false;
     if (opts.veggie && (flagsOf(r).meat || flagsOf(r).fish)) return false;
+    if (opts.revisited && !r.tags.includes("revisité")) return false;
     if (!words.length) return true;
     const t = searchText(r);
     return words.every((w) => t.includes(w));

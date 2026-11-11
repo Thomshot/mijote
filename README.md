@@ -6,7 +6,7 @@ Une appli iPhone (PWA installable sur l'écran d'accueil) qui propose des repas 
 
 ## 100 % gratuit
 
-L'appli fonctionne entièrement **sans IA et sans connexion**, grâce à une base de **174 recettes sans gluten** écrites pour l'appli :
+L'appli fonctionne entièrement **sans IA et sans connexion**, grâce à une base de **196 recettes sans gluten** écrites pour l'appli :
 
 | Catégorie | Recettes |
 |---|---|
