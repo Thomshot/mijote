@@ -12,7 +12,6 @@ import { Profile } from "./views/Profile";
 import { Onboarding } from "./views/Onboarding";
 import { RecipeDetail } from "./components/RecipeDetail";
 import { CookMode } from "./components/CookMode";
-import { AIError, remixRecipe } from "./ai";
 import { haptic } from "./utils";
 
 type Tab = "decouvrir" | "recettes" | "scanner" | "menu" | "courses" | "carnet" | "profil";
@@ -87,18 +86,30 @@ function Shell() {
           aiEnabled={app.aiEnabled}
           onRemix={async (wish) => {
             try {
+              const { remixRecipe } = await import("./ai");
               const r = await remixRecipe(app.aiCtx, open, wish);
               app.remember([r]);
               app.setIdeas([r, ...app.ideas]);
               app.setOpenRecipe(r);
             } catch (e) {
-              app.notify(e instanceof AIError ? e.message : "Le remix a échoué, réessaie.");
+              app.notify(e instanceof Error ? e.message : "Le remix a échoué, réessaie.");
             }
           }}
         />
       )}
 
-      {app.cooking && <CookMode recipe={app.cooking} onClose={() => app.setCooking(null)} />}
+      {app.cooking && (
+        <CookMode
+          recipe={app.cooking}
+          onClose={() => app.setCooking(null)}
+          onFinish={() => {
+            const r = app.cooking!;
+            app.markCooked(r);
+            app.setCooking(null);
+            app.notify("Bravo ! Recette ajoutée à « Cuisinées » 👩‍🍳");
+          }}
+        />
+      )}
 
       {app.toast && <div className="toast">{app.toast}</div>}
       {app.love && <LoveEgg onClose={() => app.setLove(false)} />}

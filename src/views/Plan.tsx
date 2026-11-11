@@ -2,7 +2,6 @@ import { useState } from "react";
 import { CalendarDays, ChevronLeft, RefreshCw, ShoppingBasket, Shuffle, Sparkles, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
 import type { Moment } from "../types";
-import { AIError, generatePlan } from "../ai";
 import { buildLocalPlan, swapPlanEntry } from "../engine";
 import { Chip, Cooking } from "../components/ui";
 import { euros, gradientFor, totalMinutes } from "../utils";
@@ -30,12 +29,13 @@ export function Plan({ onBack }: { onBack: () => void }) {
     }
     setLoading(true);
     try {
+      const { generatePlan } = await import("../ai");
       const entries = await generatePlan(app.aiCtx, { days, meals: moments, batchCooking: batch, extra, avoidTitles: app.recentTitles });
       app.setPlan(entries);
       app.remember(entries.map((e) => e.recipe));
       setEditing(false);
     } catch (e) {
-      setError(e instanceof AIError ? e.message : "Oups, quelque chose s'est mal passé.");
+      setError(e instanceof Error ? e.message : "Oups, quelque chose s'est mal passé.");
     } finally {
       setLoading(false);
     }

@@ -125,7 +125,9 @@ export function RecipeCard({
   onOpen,
   onToggleFavorite,
   compact,
+  badge,
 }: {
+  badge?: string;
   recipe: Recipe;
   favorite: boolean;
   onOpen: () => void;
@@ -140,6 +142,7 @@ export function RecipeCard({
         ) : (
           <span className="card__emoji">{recipe.emoji}</span>
         )}
+        {badge && <span className="badge badge--info">{badge}</span>}
         {recipe.source === "ia" && (
           <span className="badge badge--ai">
             <Sparkles size={12} /> IA

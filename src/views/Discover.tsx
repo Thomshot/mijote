@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { BookOpen, CalendarDays, Refrigerator, Shuffle, Sparkles, User, WandSparkles } from "lucide-react";
+import { BookOpen, CalendarDays, Refrigerator, Shuffle, Sparkles, User, Utensils, WandSparkles } from "lucide-react";
 import { useApp } from "../state";
 import { MEAL_TYPES, type MealType, type Recipe } from "../types";
-import { adaptRecipe, AIError, generateIdeas } from "../ai";
 import { CRAVING_RULES, RECIPE_COUNT, suggest } from "../engine";
 import { Chip, Cooking, RecipeCard, Sheet } from "../components/ui";
 import { Guide } from "./Guide";
+import { RestaurantCard } from "../components/RestaurantCard";
+import { currentMonth, inSeasonNow, MONTH_NAMES } from "../data/season";
 
 const CRAVINGS = Object.keys(CRAVING_RULES);
 
@@ -36,6 +37,8 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
   const [adapting, setAdapting] = useState(false);
   const [shown, setShown] = useState<string[]>([]);
   const [taps, setTaps] = useState(0);
+  const [restoOpen, setRestoOpen] = useState(false);
+  const seasonal = inSeasonNow();
 
   // Easter egg : 5 tapes sur « mijote »
   const tapTitle = () => {
@@ -73,6 +76,7 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
     setAiLoading(true);
     setError(null);
     try {
+      const { generateIdeas } = await import("../ai");
       const recipes = await generateIdeas(app.aiCtx, {
         mealType: meal,
         craving,
@@ -84,7 +88,7 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
       app.setIdeas(recipes);
       app.remember(recipes);
     } catch (e) {
-      setError(e instanceof AIError ? e.message : "Oups, quelque chose s'est mal passé.");
+      setError(e instanceof Error ? e.message : "Oups, quelque chose s'est mal passé.");
     } finally {
       setAiLoading(false);
     }
@@ -94,6 +98,7 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
     setAdapting(true);
     setError(null);
     try {
+      const { adaptRecipe } = await import("../ai");
       const r = await adaptRecipe(app.aiCtx, adaptText);
       app.remember([r]);
       app.setIdeas([r, ...app.ideas]);
@@ -101,7 +106,7 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
       setAdaptText("");
       app.setOpenRecipe(r);
     } catch (e) {
-      setError(e instanceof AIError ? e.message : "Oups, quelque chose s'est mal passé.");
+      setError(e instanceof Error ? e.message : "Oups, quelque chose s'est mal passé.");
       setAdaptOpen(false);
     } finally {
       setAdapting(false);
@@ -121,6 +126,22 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
           <User size={20} />
         </button>
       </header>
+
+      {seasonal.length > 0 && (
+        <button
+          className="season"
+          onClick={() => {
+            if (craving !== "De saison") pickCraving("De saison");
+            window.setTimeout(() => document.getElementById("pour-toi")?.scrollIntoView({ behavior: "smooth" }), 50);
+          }}
+        >
+          <span className="season__emoji">{[12, 1, 2].includes(currentMonth()) ? "❄️" : [3, 4, 5].includes(currentMonth()) ? "🌱" : [6, 7, 8].includes(currentMonth()) ? "☀️" : "🍂"}</span>
+          <span>
+            <strong>De saison en {MONTH_NAMES[currentMonth() - 1]}</strong>
+            <small>{seasonal.slice(0, 7).join(", ")}…</small>
+          </span>
+        </button>
+      )}
 
       <section className="panel">
         <div className="chips chips--scroll">
@@ -189,6 +210,13 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
           <strong>Guide sans gluten</strong>
           <small>Substitutions et pièges à éviter</small>
         </button>
+        <button className="tool tool--wide" onClick={() => setRestoOpen(true)}>
+          <Utensils size={22} />
+          <span>
+            <strong>Carte restaurant</strong>
+            <small>À montrer au serveur, en 6 langues</small>
+          </span>
+        </button>
       </section>
 
       {aiLoading && <Cooking />}
@@ -217,7 +245,7 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
         </section>
       )}
 
-      <section>
+      <section id="pour-toi">
         <div className="section-title">
           <h2>Pour toi</h2>
           <button className="link-btn" onClick={() => inspire(true)}>
@@ -265,6 +293,8 @@ export function Discover({ goProfile, goMenu }: { goProfile: () => void; goMenu:
           </div>
         )}
       </Sheet>
+
+      {restoOpen && <RestaurantCard onClose={() => setRestoOpen(false)} />}
 
       <Sheet open={guideOpen} onClose={() => setGuideOpen(false)} title="Guide sans gluten">
         <Guide />

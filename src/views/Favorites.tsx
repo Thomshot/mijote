@@ -5,13 +5,19 @@ import { Chip, Empty, RecipeCard } from "../components/ui";
 
 export function Favorites() {
   const app = useApp();
-  const [tab, setTab] = useState<"favoris" | "historique">("favoris");
+  const [tab, setTab] = useState<"favoris" | "cuisinees" | "historique">("favoris");
   const [q, setQ] = useState("");
-  const list = tab === "favoris" ? app.favorites : app.history;
+  const cookedList = Object.values(app.cooked)
+    .sort((a, b) => b.last - a.last)
+    .map((c) => c.recipe);
+  const withNotes = new Set(Object.keys(app.notes));
+  const list = tab === "favoris" ? app.favorites : tab === "cuisinees" ? cookedList : app.history;
   const needle = q.trim().toLowerCase();
   const filtered = needle
     ? list.filter((r) =>
-        [r.title, r.description, ...r.tags, ...r.ingredients.map((i) => i.name)].some((s) => s.toLowerCase().includes(needle)),
+        [r.title, r.description, app.notes[r.title] ?? "", ...r.tags, ...r.ingredients.map((i) => i.name)].some((s) =>
+          s.toLowerCase().includes(needle),
+        ),
       )
     : list;
 
@@ -24,9 +30,14 @@ export function Favorites() {
         <Chip active={tab === "favoris"} onClick={() => setTab("favoris")}>
           ❤️ Favoris ({app.favorites.length})
         </Chip>
-        <Chip active={tab === "historique"} onClick={() => setTab("historique")}>
-          🕓 Déjà proposées ({app.history.length})
+        <Chip active={tab === "cuisinees"} onClick={() => setTab("cuisinees")}>
+          👩‍🍳 Cuisinées ({cookedList.length})
         </Chip>
+        {app.history.length > 0 && (
+          <Chip active={tab === "historique"} onClick={() => setTab("historique")}>
+            🕓 Créations IA ({app.history.length})
+          </Chip>
+        )}
       </div>
       {list.length > 0 && (
         <div className="search">
@@ -39,15 +50,18 @@ export function Favorites() {
           <Empty emoji="💛" title="Pas encore de favoris">
             Touche le cœur sur une recette pour la garder ici, même hors connexion.
           </Empty>
-        ) : (
-          <Empty emoji="🕓" title="Rien pour l'instant">
-            Les recettes proposées par l'IA apparaîtront ici.
+        ) : tab === "cuisinees" ? (
+          <Empty emoji="👩‍🍳" title="Rien de cuisiné pour l'instant">
+            Lance le mode « Cuisiner » d'une recette et va jusqu'au bout : elle apparaîtra ici, avec tes notes.
           </Empty>
+        ) : (
+          <Empty emoji="🕓" title="Rien pour l'instant" />
         )
       ) : (
         <div className="grid">
           {filtered.map((r) => (
             <RecipeCard
+              badge={tab === "cuisinees" ? `👩‍🍳 ${app.cooked[r.title]?.count ?? 1}×` : withNotes.has(r.title) ? "📝" : undefined}
               key={r.id}
               recipe={r}
               favorite={app.isFavorite(r)}

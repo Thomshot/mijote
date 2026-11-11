@@ -1,5 +1,5 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
-import type { PlanEntry, Profile, Recipe, Settings, ShoppingItem } from "./types";
+import type { PlanEntry, Profile, Recipe, SafeProduct, Settings, ShoppingItem } from "./types";
 import { DEFAULT_PROFILE } from "./defaults";
 import { useStored } from "./storage";
 import type { AICtx } from "./ai";
@@ -16,6 +16,11 @@ function useAppState() {
   const [plan, setPlan] = useStored<PlanEntry[]>("plan", []);
   const [shopping, setShopping] = useStored<ShoppingItem[]>("shopping", []);
   const [votes, setVotes] = useStored<Record<string, 1 | -1>>("votes", {});
+  /** Nombre de fois où chaque recette a été cuisinée (clé : titre) */
+  const [cooked, setCooked] = useStored<Record<string, { count: number; last: number; recipe: Recipe }>>("cooked", {});
+  /** Notes perso par recette (clé : titre) */
+  const [notes, setNotes] = useStored<Record<string, string>>("notes", {});
+  const [safeProducts, setSafeProducts] = useStored<SafeProduct[]>("safeProducts", []);
   const [openRecipe, setOpenRecipe] = useState<Recipe | null>(null);
   const [cooking, setCooking] = useState<Recipe | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -34,6 +39,28 @@ function useAppState() {
     } else {
       setFavorites([r, ...favorites]);
       notify("Ajoutée aux favoris ❤️");
+    }
+  };
+
+  const markCooked = (r: Recipe) =>
+    setCooked((all) => ({ ...all, [r.title]: { count: (all[r.title]?.count ?? 0) + 1, last: Date.now(), recipe: r } }));
+
+  const setNote = (r: Recipe, text: string) =>
+    setNotes((all) => {
+      const next = { ...all };
+      if (text.trim()) next[r.title] = text;
+      else delete next[r.title];
+      return next;
+    });
+
+  const isSafe = (code: string) => safeProducts.some((p) => p.code === code);
+  const toggleSafe = (p: SafeProduct) => {
+    if (isSafe(p.code)) {
+      setSafeProducts(safeProducts.filter((x) => x.code !== p.code));
+      notify("Retiré de mes produits sûrs");
+    } else {
+      setSafeProducts([p, ...safeProducts]);
+      notify("Ajouté à mes produits sûrs ⭐");
     }
   };
 
@@ -81,6 +108,13 @@ function useAppState() {
     setShopping,
     votes,
     vote,
+    cooked,
+    markCooked,
+    notes,
+    setNote,
+    safeProducts,
+    isSafe,
+    toggleSafe,
     openRecipe,
     setOpenRecipe,
     cooking,

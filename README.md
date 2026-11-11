@@ -27,6 +27,11 @@ Un moteur de suggestions local choisit les recettes selon le profil :
 ## Fonctionnalités
 
 - 📷 **Scanner de code-barres** : on scanne un produit au supermarché et l'appli indique s'il contient du gluten (✅ label sans gluten, 🟢 probablement sans gluten, ⚠️ traces possibles ou avoine non certifiée, ⛔ contient du gluten). Les ingrédients en cause sont surlignés. Les données viennent d'[Open Food Facts](https://fr.openfoodfacts.org) (gratuit, collaboratif), le décodage du code-barres de ZXing, et l'historique des scans est conservé.
+- 🍽️ **Carte restaurant** : un écran à montrer au serveur pour expliquer l'intolérance, en 6 langues (français, anglais, espagnol, italien, allemand, portugais), avec des conseils pour commander.
+- 🍂 **De saison** : un calendrier des fruits et légumes oriente les suggestions selon le mois et évite par exemple les tomates en hiver. Une envie « De saison » est aussi disponible.
+- ⭐ **Mes produits sûrs** : les produits scannés et validés sont marqués pour être retrouvés en un coup d'œil.
+- 📝 **Notes perso et « Cuisinées »** : une note par recette, et un compteur de fois cuisinées (le mode cuisine jusqu'au bout l'incrémente).
+- 💾 **Sauvegarde / restauration** de toutes les données dans un fichier, pour changer de téléphone.
 - 🖼️ **Une photo pour chaque recette** (Wikimedia Commons / Flickr, licences libres, crédit affiché sur chaque fiche).
 
 - ✨ **Inspire-moi** : 6 suggestions instantanées selon la catégorie, l'envie (réconfortant, rapide, petit budget, chocolat…) et les goûts.

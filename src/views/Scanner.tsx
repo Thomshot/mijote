@@ -1,5 +1,5 @@
 import { lazy, Suspense, useCallback, useState } from "react";
-import { ExternalLink, Keyboard, ScanBarcode, ShoppingBasket, Trash } from "lucide-react";
+import { ExternalLink, Keyboard, ScanBarcode, ShoppingBasket, Star, Trash } from "lucide-react";
 import { useStored, uid } from "../storage";
 import { useApp } from "../state";
 import { analyze, fetchProduct, VERDICT_STYLE, type Analysis, type ProductInfo, type ScanRecord } from "../scanner/gluten";
@@ -70,6 +70,23 @@ function ResultCard({ code, product, analysis }: { code: string; product: Produc
       <div className="actions">
         {product && (analysis.verdict === "safe" || analysis.verdict === "probable") && (
           <button
+            className={`btn btn--ghost ${app.isSafe(code) ? "is-star" : ""}`}
+            onClick={() =>
+              app.toggleSafe({
+                code,
+                name: product.name,
+                brand: product.brand,
+                image: product.image,
+                verdict: analysis.verdict as "safe" | "probable",
+                addedAt: Date.now(),
+              })
+            }
+          >
+            <Star size={18} fill={app.isSafe(code) ? "currentColor" : "none"} /> {app.isSafe(code) ? "Produit sûr" : "Marquer sûr"}
+          </button>
+        )}
+        {product && (analysis.verdict === "safe" || analysis.verdict === "probable") && (
+          <button
             className="btn btn--soft"
             onClick={() => {
               app.setShopping([
@@ -94,6 +111,8 @@ function ResultCard({ code, product, analysis }: { code: string; product: Produc
 }
 
 export function Scanner() {
+  const app = useApp();
+  const [safeQuery, setSafeQuery] = useState("");
   const [scanning, setScanning] = useState(false);
   const [manual, setManual] = useState("");
   const [loading, setLoading] = useState(false);
@@ -170,6 +189,36 @@ export function Scanner() {
       {error && <p className="error">{error}</p>}
       {loading && <Cooking label="On lit l'étiquette…" />}
       {current && !loading && <ResultCard {...current} />}
+
+      {app.safeProducts.length > 0 && (
+        <section>
+          <div className="section-title">
+            <h2>⭐ Mes produits sûrs</h2>
+          </div>
+          {app.safeProducts.length > 5 && (
+            <input
+              className="input input--small"
+              value={safeQuery}
+              onChange={(e) => setSafeQuery(e.target.value)}
+              placeholder="Chercher dans mes produits…"
+            />
+          )}
+          <div className="scan-list">
+            {app.safeProducts
+              .filter((p) => `${p.name} ${p.brand}`.toLowerCase().includes(safeQuery.trim().toLowerCase()))
+              .map((p) => (
+                <button key={p.code} className="scan-row" onClick={() => lookup(p.code)}>
+                  {p.image ? <img src={p.image} alt="" loading="lazy" /> : <span className="scan-row__ph">📦</span>}
+                  <span className="scan-row__text">
+                    <strong>{p.name}</strong>
+                    <small className="muted">{p.brand}</small>
+                  </span>
+                  <span className={`scan-badge ${VERDICT_STYLE[p.verdict].cls}`}>{VERDICT_STYLE[p.verdict].emoji}</span>
+                </button>
+              ))}
+          </div>
+        </section>
+      )}
 
       <section>
         <div className="section-title">

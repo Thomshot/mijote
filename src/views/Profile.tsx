@@ -1,4 +1,6 @@
-import { ChevronLeft } from "lucide-react";
+import { useRef, useState } from "react";
+import { ChevronLeft, Download, Upload } from "lucide-react";
+import { exportAll, importAll } from "../storage";
 import { useApp } from "../state";
 import type { Profile as P } from "../types";
 import { Chip, TagInput } from "../components/ui";
@@ -100,21 +102,74 @@ export function Profile({ onBack }: { onBack: () => void }) {
         <h2>Goûts & contraintes</h2>
         <PreferencesForm profile={app.profile} onChange={app.setProfile} />
       </section>
-      <section className="panel">
-        <h2>Données</h2>
-        <p className="muted small">
-          Favoris, menus et liste de courses sont enregistrés sur ce téléphone uniquement.
-        </p>
-        <button
-          className="btn btn--ghost btn--danger btn--block"
-          onClick={() => {
-            if (confirm("Effacer l'historique des recettes proposées ?")) app.setHistory([]);
-          }}
-        >
-          Effacer l'historique
-        </button>
-      </section>
+      <Backup />
       <p className="muted small center">Mijote · fait avec ❤️ pour une cuisine 100 % sans gluten</p>
     </div>
+  );
+}
+
+/** Sauvegarde et restauration : utile pour changer de téléphone. */
+function Backup() {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+
+  const save = async () => {
+    const json = JSON.stringify(exportAll(), null, 1);
+    const name = `mijote-sauvegarde-${new Date().toISOString().slice(0, 10)}.json`;
+    const file = new File([json], name, { type: "application/json" });
+    try {
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], title: "Sauvegarde Mijote" });
+        return;
+      }
+    } catch {
+      return; // partage annulé
+    }
+    const url = URL.createObjectURL(file);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const restore = async (f: File) => {
+    try {
+      const n = importAll(await f.text());
+      setMsg(`Sauvegarde restaurée (${n} éléments). Rechargement…`);
+      window.setTimeout(() => window.location.reload(), 900);
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : "Fichier illisible.");
+    }
+  };
+
+  return (
+    <section className="panel">
+      <h2>Sauvegarde</h2>
+      <p className="muted small">
+        Favoris, notes, recettes cuisinées, produits sûrs et liste de courses sont enregistrés sur ce téléphone. Fais une
+        sauvegarde (dans Fichiers, par mail ou par message) pour les retrouver sur un autre téléphone.
+      </p>
+      <div className="actions">
+        <button className="btn btn--soft" onClick={save}>
+          <Download size={18} /> Sauvegarder
+        </button>
+        <button className="btn btn--ghost" onClick={() => fileRef.current?.click()}>
+          <Upload size={18} /> Restaurer
+        </button>
+      </div>
+      <input
+        ref={fileRef}
+        type="file"
+        accept="application/json,.json"
+        hidden
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) restore(f);
+          e.target.value = "";
+        }}
+      />
+      {msg && <p className="small">{msg}</p>}
+    </section>
   );
 }

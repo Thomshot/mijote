@@ -91,3 +91,13 @@ export interface Settings {
   apiKey: string;
   creativity: "classique" | "équilibrée" | "audacieuse";
 }
+
+/** Produit scanné marqué comme sûr par l'utilisatrice. */
+export interface SafeProduct {
+  code: string;
+  name: string;
+  brand: string;
+  image: string;
+  verdict: "safe" | "probable";
+  addedAt: number;
+}

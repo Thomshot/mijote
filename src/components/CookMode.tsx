@@ -29,7 +29,7 @@ function findMinutes(step: string) {
   return Number(m[2] ?? m[1]);
 }
 
-export function CookMode({ recipe, onClose }: { recipe: Recipe; onClose: () => void }) {
+export function CookMode({ recipe, onClose, onFinish }: { recipe: Recipe; onClose: () => void; onFinish: () => void }) {
   useWakeLock();
   const [step, setStep] = useState(-1); // -1 = mise en place
   const [timerEnd, setTimerEnd] = useState<number | null>(null);
@@ -122,7 +122,7 @@ export function CookMode({ recipe, onClose }: { recipe: Recipe; onClose: () => v
             {step < 0 ? "C'est parti" : "Suivant"} <ChevronRight size={20} />
           </button>
         ) : (
-          <button className="btn btn--primary" onClick={onClose}>
+          <button className="btn btn--primary" onClick={onFinish}>
             Bon appétit ! 🎉
           </button>
         )}

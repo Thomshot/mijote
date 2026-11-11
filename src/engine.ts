@@ -5,6 +5,22 @@
 import type { MealType, Moment, PlanEntry, Profile, Recipe } from "./types";
 import { RECIPES } from "./data/db";
 import { totalMinutes } from "./utils";
+import { seasonality } from "./data/season";
+
+const seasonCache = new Map<string, { inSeason: number; outOfSeason: number }>();
+/** Saisonnalité d'une recette pour le mois en cours (fruits et légumes frais uniquement). */
+export function seasonOf(r: Recipe) {
+  let v = seasonCache.get(r.id);
+  if (!v) {
+    v = seasonality(r.ingredients.filter((i) => i.aisle === "Fruits & légumes").map((i) => i.name));
+    seasonCache.set(r.id, v);
+  }
+  return v;
+}
+export const isInSeason = (r: Recipe) => {
+  const s = seasonOf(r);
+  return s.inSeason > 0 && s.outOfSeason === 0;
+};
 
 export const norm = (s: string) =>
   s
@@ -142,6 +158,7 @@ export interface Criteria {
 
 /** Envies prédéfinies → règles de correspondance. */
 export const CRAVING_RULES: Record<string, (r: Recipe) => boolean> = {
+  "De saison": isInSeason,
   Réconfortant: (r) => r.tags.includes("réconfortant") || r.tags.includes("hiver"),
   Rapide: (r) => totalMinutes(r) <= 25,
   Healthy: (r) => r.tags.includes("healthy"),
@@ -164,6 +181,9 @@ function score(r: Recipe, profile: Profile, c: Criteria, fridgeWords: string[]) 
   const tooLong = totalMinutes(r) - profile.maxMinutes;
   if (tooLong > 0) s -= 2 + tooLong / 15;
   if (profile.level === "débutant" && r.difficulty === "avancé") s -= 3;
+  // Saison : on favorise les produits du moment, on évite les tomates en hiver.
+  const season = seasonOf(r);
+  s += Math.min(season.inSeason, 2) * 0.8 - season.outOfSeason * 1.5;
   if (profile.level === "confirmé" && r.difficulty !== "facile") s += 0.5;
   if (fridgeWords.length) {
     const hits = fridgeWords.filter((w) => r.ingredients.some((i) => norm(i.name).includes(w))).length;

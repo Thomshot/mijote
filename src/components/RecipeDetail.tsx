@@ -18,7 +18,8 @@ import {
 } from "lucide-react";
 import type { Recipe } from "../types";
 import { euros, formatQty, gradientFor, totalMinutes } from "../utils";
-import { dietLabels } from "../engine";
+import { dietLabels, isInSeason } from "../engine";
+import { useApp } from "../state";
 import { Chip, Cooking, Sheet } from "./ui";
 
 const REMIXES = ["Plus rapide", "Moins cher", "Version végétarienne", "Plus légère", "Plus épicée", "Sans lactose"];
@@ -49,8 +50,11 @@ export function RecipeDetail({
   const [servings, setServings] = useState<number | null>(null);
   const [remixing, setRemixing] = useState(false);
   const [custom, setCustom] = useState("");
+  const app = useApp();
+  const [note, setNoteDraft] = useState(() => (recipe ? (app.notes[recipe.title] ?? "") : ""));
 
   if (!recipe) return null;
+  const cookedInfo = app.cooked[recipe.title];
   const s = servings ?? recipe.servings;
   const factor = s / recipe.servings;
 
@@ -97,6 +101,11 @@ export function RecipeDetail({
         <div className="detail__head">
           <div className="detail__kicker">
             {recipe.mealType} · {recipe.difficulty}
+            {cookedInfo && (
+              <span className="badge badge--inline badge--cooked">
+                👩‍🍳 cuisinée {cookedInfo.count} fois
+              </span>
+            )}
             {recipe.source === "ia" && (
               <span className="badge badge--ai badge--inline">
                 <Sparkles size={12} /> créée par l'IA
@@ -126,6 +135,7 @@ export function RecipeDetail({
           </div>
           <div className="tags">
             <span className="tag tag--gf">🌾 Sans gluten</span>
+            {isInSeason(recipe) && <span className="tag tag--season">🍂 De saison</span>}
             {dietLabels(recipe).map((d) => (
               <span key={d} className="tag tag--gf">
                 {d}
@@ -212,7 +222,7 @@ export function RecipeDetail({
 
         <section className="detail__section">
           <h2>Ton avis</h2>
-          <p className="muted small">L'IA s'en sert pour mieux cibler ses prochaines idées.</p>
+          <p className="muted small">Mijote s'en sert pour mieux cibler tes prochaines suggestions.</p>
           <div className="vote">
             <button className={`btn btn--ghost ${vote === 1 ? "vote--on" : ""}`} onClick={() => onVote(1)}>
               <ThumbsUp size={18} /> On a adoré
@@ -221,6 +231,18 @@ export function RecipeDetail({
               <ThumbsDown size={18} /> Bof
             </button>
           </div>
+        </section>
+
+        <section className="detail__section">
+          <h2>📝 Mes notes</h2>
+          <textarea
+            className="input"
+            rows={3}
+            value={note}
+            onChange={(e) => setNoteDraft(e.target.value)}
+            onBlur={() => app.setNote(recipe, note)}
+            placeholder="Ex : un peu plus de sel, cuisson 5 min de moins, parfait avec du parmesan…"
+          />
         </section>
 
         {aiEnabled && (
